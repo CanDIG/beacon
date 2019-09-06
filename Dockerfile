@@ -2,7 +2,7 @@ FROM golang:1.10 AS build
 WORKDIR /go/src
 COPY go ./go
 ADD candig google ./
-COPY main.go .
+COPY main.go go.mod go.sum ./
 
 ENV CGO_ENABLED=0
 RUN go get -d -v ./...
