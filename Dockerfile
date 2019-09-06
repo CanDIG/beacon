@@ -1,7 +1,7 @@
-FROM golang:1.10 AS build
+FROM golang:1.13 AS build
 WORKDIR /go/src
 COPY go ./go
-ADD candig google ./
+COPY vendor ./vendor
 COPY main.go go.mod go.sum ./
 
 ENV CGO_ENABLED=0

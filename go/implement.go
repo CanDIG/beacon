@@ -46,4 +46,5 @@ func getQuery(c *gin.Context) {
 }
 
 func postQuery(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{})
 }
