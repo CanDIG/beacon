@@ -1,0 +1,6 @@
+[submodule "specification"]
+	path = specification
+	url = https://github.com/ga4gh-beacon/specification
+[submodule "candig-schemas"]
+	path = candig-schemas
+	url = https://github.com/CanDIG/candig-schemas
