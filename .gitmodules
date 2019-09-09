@@ -4,3 +4,6 @@
 [submodule "candig-schemas"]
 	path = candig-schemas
 	url = https://github.com/CanDIG/candig-schemas
+[submodule "candig-server"]
+	path = candig-server
+	url = https://github.com/CanDIG/candig-server

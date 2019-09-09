@@ -1,0 +1,10 @@
+version: '3.0'
+services:
+  candig-server:
+    build: candig-server
+  beacon:
+    build: .
+    expose:
+      - 8000
+    environment:
+      CANDIG_SERVER: http://candig-server
