@@ -13,20 +13,13 @@ package main
 import (
 	"log"
 
-	// WARNING!
-	// Change this to a fully-qualified import path
-	// once you place this file into your project.
-	// For example,
-	//
-	//    sw "github.com/myname/myrepo/go"
-	//
-	sw "github.com/CanDIG/beacon/go"
+	server "github.com/CanDIG/beacon/beacon-server"
 )
 
 func main() {
 	log.Printf("Server started")
 
-	router := sw.NewRouter()
+	router := server.NewRouter()
 
 	log.Fatal(router.Run(":8080"))
 }
