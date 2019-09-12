@@ -34,6 +34,7 @@ type Routes []Route
 // NewRouter returns a new router.
 func NewRouter() *gin.Engine {
 	router := gin.Default()
+	router.Use(AddOauth)
 	for _, route := range routes {
 		switch route.Method {
 		case http.MethodGet:
