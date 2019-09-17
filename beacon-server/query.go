@@ -38,10 +38,17 @@ func allDatasetsStrings(ctx context.Context) (out []string, err error) {
 // finished.
 func allVariants(ctx context.Context, dataset string, req BeaconAlleleRequest, variantsets []string, ch chan<- client.Ga4ghVariant) (err error) {
 	defer close(ch)
+
+	// omit end if it's the default 0
+	var end *string
+	if req.EndMax > 0 {
+		end = client.PtrString(string(req.EndMax))
+	}
+
 	res, _, err := getClient(ctx).VariantServiceApi.SearchVariants(ctx, client.Ga4ghSearchVariantsRequest{
 		DatasetId:     &dataset,
-		Start:         client.PtrString(string(req.StartMin)),
-		End:           client.PtrString(string(req.EndMax)),
+		Start:         client.PtrString(string(req.StartMin)), // start will default to 0 anyway
+		End:           end,
 		ReferenceName: client.PtrString(string(req.ReferenceName)),
 		VariantSetIds: &variantsets,
 	})
@@ -59,10 +66,16 @@ func allVariants(ctx context.Context, dataset string, req BeaconAlleleRequest, v
 			}
 		}
 
+		// omit end if it's the default 0
+		var end *string
+		if req.EndMax > 0 {
+			end = client.PtrString(string(req.EndMax))
+		}
+
 		res, _, err = getClient(ctx).VariantServiceApi.SearchVariants(ctx, client.Ga4ghSearchVariantsRequest{
 			DatasetId:     &dataset,
 			Start:         client.PtrString(string(req.StartMin)),
-			End:           client.PtrString(string(req.EndMax)),
+			End:           end,
 			ReferenceName: client.PtrString(string(req.ReferenceName)),
 			PageToken:     client.PtrString(res.GetNextPageToken()),
 		})
@@ -192,6 +205,9 @@ func internalRun(ctx context.Context, req BeaconAlleleRequest) (exists bool, out
 	}
 	if req.StartMin == 0 {
 		req.StartMin = int32(req.Start)
+	} else if req.StartMax == 0 {
+		err = errors.New("missing startMax parameter")
+		return
 	}
 	if req.EndMax == 0 {
 		req.EndMax = req.End
@@ -246,8 +262,6 @@ func internalRun(ctx context.Context, req BeaconAlleleRequest) (exists bool, out
 				Exists:       count > 0,
 				// todo: add more fields with metadata
 			})
-		} else {
-			out = append(out, BeaconDatasetAlleleResponse{})
 		}
 	}
 
