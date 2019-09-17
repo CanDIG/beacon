@@ -77,7 +77,7 @@ var (
 	BeaconId   = os.Getenv("BEACON_ID")
 )
 
-func GetIndex(c *gin.Context) {
+func GetBeacon(c *gin.Context) {
 	datasets, err := allDatasets(c)
 	if err != nil {
 		c.AbortWithError(http.StatusInternalServerError, err)
@@ -89,5 +89,6 @@ func GetIndex(c *gin.Context) {
 		Id:         BeaconId,
 		ApiVersion: ApiVersion,
 		Datasets:   datasets,
+		// todo: add more organizational metadata
 	})
 }

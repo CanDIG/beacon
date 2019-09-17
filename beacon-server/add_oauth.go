@@ -18,7 +18,7 @@ const xClaim = "X-Claim-"
 
 var CandigHost = os.Getenv("CANDIG_HOST")
 
-func AddOauth(c *gin.Context) {
+func addOauth(c *gin.Context) {
 	cfg := client.NewConfiguration()
 	for _, h := range passthroughHeaders {
 		auth := c.GetHeader(h)

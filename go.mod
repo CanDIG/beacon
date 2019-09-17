@@ -9,6 +9,7 @@ require (
 	github.com/json-iterator/go v1.1.7 // indirect
 	github.com/keegancsmith/rpc v1.1.0 // indirect
 	github.com/mattn/go-isatty v0.0.9 // indirect
+	github.com/pkg/errors v0.8.1
 	github.com/stamblerre/gocode v0.0.0-20190327203809-810592086997 // indirect
 	github.com/ugorji/go v1.1.7 // indirect
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45

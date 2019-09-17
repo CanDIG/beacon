@@ -1,0 +1,8 @@
+/docker-compose.yml
+/Dockerfile
+/beacon
+/candig-schemas/
+/specification/
+/candig-server/
+/api/
+/*.sh
