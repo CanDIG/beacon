@@ -251,8 +251,6 @@ func internalRun(ctx context.Context, req BeaconAlleleRequest) (exists bool, out
 		} else if req.IncludeDatasetResponses == "HIT" && count > 0 {
 			incl = true
 		} else if req.IncludeDatasetResponses == "MISS" && count == 0 {
-			// todo: this isn't correct but I need a
-			// server that will support this
 			incl = true
 		}
 		if incl {
