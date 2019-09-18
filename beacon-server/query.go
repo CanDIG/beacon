@@ -87,6 +87,14 @@ func allVariants(ctx context.Context, dataset string, req BeaconAlleleRequest, v
 	return
 }
 
+const MaxWorkingStringArray = 1_000
+
+type toomany struct{}
+
+func (t toomany) Error() string {
+	return "Too many values to return."
+}
+
 func allReferenceSets(ctx context.Context, assId string) (out []string, err error) {
 	res, _, err := getClient(ctx).ReferenceServiceApi.SearchReferenceSets(ctx, client.Ga4ghSearchReferenceSetsRequest{
 		AssemblyId: &assId,
@@ -104,6 +112,11 @@ func allReferenceSets(ctx context.Context, assId string) (out []string, err erro
 				return
 			}
 			out = append(out, rr.GetId())
+
+			// put a cap on the array we return
+			if len(out) > MaxWorkingStringArray {
+				return nil, toomany{}
+			}
 		}
 
 		res, _, err = getClient(ctx).ReferenceServiceApi.SearchReferenceSets(ctx, client.Ga4ghSearchReferenceSetsRequest{
@@ -119,6 +132,11 @@ func allReferenceSets(ctx context.Context, assId string) (out []string, err erro
 }
 
 func allVariantSets(ctx context.Context, dataId string, refsetmap map[string]struct{}) (variantsets []string, err error) {
+	// we can't filter them out so don't bother returning them
+	if refsetmap == nil {
+		return
+	}
+
 	res, _, err := getClient(ctx).VariantServiceApi.SearchVariantSets(ctx, client.Ga4ghSearchVariantSetsRequest{
 		DatasetId: &dataId,
 	})
@@ -130,6 +148,11 @@ func allVariantSets(ctx context.Context, dataId string, refsetmap map[string]str
 		for _, vs := range res.GetVariantSets() {
 			if _, ok := refsetmap[vs.GetReferenceSetId()]; ok {
 				variantsets = append(variantsets, vs.GetId())
+
+				// cap the array we return
+				if len(variantsets) > MaxWorkingStringArray {
+					return nil, toomany{}
+				}
 			}
 		}
 
@@ -215,12 +238,19 @@ func internalRun(ctx context.Context, req BeaconAlleleRequest) (exists bool, out
 
 	// build list of refsets
 	refsets, err := allReferenceSets(ctx, req.AssemblyId)
+	if _, ok := errors.Cause(err).(toomany); ok {
+		refsets, err = nil, nil
+	}
 	if err != nil {
 		return
 	}
 	refsetsmap := make(map[string]struct{})
-	for _, refset := range refsets {
-		refsetsmap[refset] = struct{}{}
+	if refsets != nil {
+		for _, refset := range refsets {
+			refsetsmap[refset] = struct{}{}
+		}
+	} else {
+		refsetsmap = nil
 	}
 
 	// setup variant checkers
@@ -273,6 +303,9 @@ func countVariants(ctx context.Context, dataset string, refsetsmap map[string]st
 
 	// build list of variantsets
 	variantsets, err := allVariantSets(ctx, dataset, refsetsmap)
+	if _, ok := errors.Cause(err).(toomany); ok {
+		variantsets, err = nil, nil
+	}
 	if err != nil {
 		return
 	}
