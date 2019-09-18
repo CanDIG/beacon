@@ -293,6 +293,12 @@ func countVariants(ctx context.Context, dataset string, refsetsmap map[string]st
 
 		if ok {
 			count++
+
+			// short circuit to avoid iterating over all
+			// the data
+			if req.IncludeDatasetResponses == "NONE" {
+				return
+			}
 		}
 	}
 
