@@ -87,6 +87,14 @@ func allVariants(ctx context.Context, dataset string, req BeaconAlleleRequest, v
 	return
 }
 
+const MaxWorkingStringArray = 1_000
+
+type toomany struct{}
+
+func (t toomany) Error() string {
+	return "Too many values to return."
+}
+
 func allReferenceSets(ctx context.Context, assId string) (out []string, err error) {
 	res, _, err := getClient(ctx).ReferenceServiceApi.SearchReferenceSets(ctx, client.Ga4ghSearchReferenceSetsRequest{
 		AssemblyId: &assId,
@@ -98,6 +106,11 @@ func allReferenceSets(ctx context.Context, assId string) (out []string, err erro
 	for len(res.GetReferenceSets()) != 0 {
 		for _, rr := range res.GetReferenceSets() {
 			out = append(out, rr.GetId())
+
+			// put a cap on the array we return
+			if len(out) > MaxWorkingStringArray {
+				return nil, toomany{}
+			}
 		}
 
 		res, _, err = getClient(ctx).ReferenceServiceApi.SearchReferenceSets(ctx, client.Ga4ghSearchReferenceSetsRequest{
@@ -113,6 +126,11 @@ func allReferenceSets(ctx context.Context, assId string) (out []string, err erro
 }
 
 func allVariantSets(ctx context.Context, dataId string, refsetmap map[string]struct{}) (variantsets []string, err error) {
+	// we can't filter them out so don't bother returning them
+	if refsetmap == nil {
+		return
+	}
+
 	res, _, err := getClient(ctx).VariantServiceApi.SearchVariantSets(ctx, client.Ga4ghSearchVariantSetsRequest{
 		DatasetId: &dataId,
 	})
@@ -124,6 +142,11 @@ func allVariantSets(ctx context.Context, dataId string, refsetmap map[string]str
 		for _, vs := range res.GetVariantSets() {
 			if _, ok := refsetmap[vs.GetReferenceSetId()]; ok {
 				variantsets = append(variantsets, vs.GetId())
+
+				// cap the array we return
+				if len(variantsets) > MaxWorkingStringArray {
+					return nil, toomany{}
+				}
 			}
 		}
 
@@ -209,12 +232,19 @@ func internalRun(ctx context.Context, req BeaconAlleleRequest) (exists bool, out
 
 	// build list of refsets
 	refsets, err := allReferenceSets(ctx, req.AssemblyId)
+	if _, ok := errors.Cause(err).(toomany); ok {
+		refsets, err = nil, nil
+	}
 	if err != nil {
 		return
 	}
 	refsetsmap := make(map[string]struct{})
-	for _, refset := range refsets {
-		refsetsmap[refset] = struct{}{}
+	if refsets != nil {
+		for _, refset := range refsets {
+			refsetsmap[refset] = struct{}{}
+		}
+	} else {
+		refsetsmap = nil
 	}
 
 	// setup variant checkers
@@ -267,6 +297,9 @@ func countVariants(ctx context.Context, dataset string, refsetsmap map[string]st
 
 	// build list of variantsets
 	variantsets, err := allVariantSets(ctx, dataset, refsetsmap)
+	if _, ok := errors.Cause(err).(toomany); ok {
+		variantsets, err = nil, nil
+	}
 	if err != nil {
 		return
 	}
@@ -280,7 +313,7 @@ func countVariants(ctx context.Context, dataset string, refsetsmap map[string]st
 
 	for variant := range varch {
 		var ok bool
-		ok, err = isvalidVariant(variant, req, refvc, altvc)
+		ok, err = isvalidVariant(ctx, variantsets != nil, variant, req, refvc, altvc)
 		if err != nil {
 			return
 		}
@@ -299,10 +332,30 @@ func countVariants(ctx context.Context, dataset string, refsetsmap map[string]st
 	return
 }
 
-func isvalidVariant(variant client.Ga4ghVariant, req BeaconAlleleRequest, refvc, altvc variantChecker) (result bool, err error) {
+func isvalidVariant(ctx context.Context, hasVariantSets bool, variant client.Ga4ghVariant, req BeaconAlleleRequest, refvc, altvc variantChecker) (result bool, err error) {
 	defer func() {
 		err = errors.WithStack(err)
 	}()
+
+	// If we didn't already filter out by assembly_id then we
+	// gotta do it now.
+	if !hasVariantSets {
+		var res client.Ga4ghVariantSet
+		res, _, err = getClient(ctx).VariantServiceApi.GetVariantSet(ctx, variant.GetVariantSetId())
+		if err != nil {
+			return
+		}
+
+		var ress client.Ga4ghReferenceSet
+		ress, _, err = getClient(ctx).ReferenceServiceApi.GetReferenceSet(ctx, res.GetReferenceSetId())
+		if err != nil {
+			return
+		}
+
+		if ress.GetAssemblyId() != req.AssemblyId {
+			return
+		}
+	}
 
 	i, err := strconv.Atoi(*variant.Start)
 	if err != nil {
