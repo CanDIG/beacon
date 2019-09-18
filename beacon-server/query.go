@@ -214,7 +214,7 @@ func internalRun(ctx context.Context, req BeaconAlleleRequest) (exists bool, out
 	}
 
 	// build list of refsets
-	refsets, err := allDatasetsStrings(ctx)
+	refsets, err := allReferenceSets(ctx, req.AssemblyId)
 	if err != nil {
 		return
 	}
