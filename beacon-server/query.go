@@ -319,7 +319,7 @@ func countVariants(ctx context.Context, dataset string, refsetsmap map[string]st
 
 	for variant := range varch {
 		var ok bool
-		ok, err = isvalidVariant(variant, req, refvc, altvc)
+		ok, err = isvalidVariant(ctx, variantsets != nil, variant, req, refvc, altvc)
 		if err != nil {
 			return
 		}
@@ -338,10 +338,30 @@ func countVariants(ctx context.Context, dataset string, refsetsmap map[string]st
 	return
 }
 
-func isvalidVariant(variant client.Ga4ghVariant, req BeaconAlleleRequest, refvc, altvc variantChecker) (result bool, err error) {
+func isvalidVariant(ctx context.Context, hasVariantSets bool, variant client.Ga4ghVariant, req BeaconAlleleRequest, refvc, altvc variantChecker) (result bool, err error) {
 	defer func() {
 		err = errors.WithStack(err)
 	}()
+
+	// If we didn't already filter out by assembly_id then we
+	// gotta do it now.
+	if !hasVariantSets {
+		var res client.Ga4ghVariantSet
+		res, _, err = getClient(ctx).VariantServiceApi.GetVariantSet(ctx, variant.GetVariantSetId())
+		if err != nil {
+			return
+		}
+
+		var ress client.Ga4ghReferenceSet
+		ress, _, err = getClient(ctx).ReferenceServiceApi.GetReferenceSet(ctx, res.GetReferenceSetId())
+		if err != nil {
+			return
+		}
+
+		if ress.GetAssemblyId() != req.AssemblyId {
+			return
+		}
+	}
 
 	i, err := strconv.Atoi(*variant.Start)
 	if err != nil {
