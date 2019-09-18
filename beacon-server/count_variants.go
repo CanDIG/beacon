@@ -30,7 +30,8 @@ func countVariants(ctx context.Context, dataset string, refsetsmap map[string]st
 	validc, errc := isValidVariantPool(ctx, variantsets != nil, varch, req, refvc, altvc)
 	errcs = append(errcs, errc)
 
-	errc = mergeerror(errcs...)
+	errcv := mergeerror(errcs...)
+	defer close(errcv)
 
 	for _ = range validc {
 		count++
@@ -42,7 +43,7 @@ func countVariants(ctx context.Context, dataset string, refsetsmap map[string]st
 		}
 	}
 
-	err = <-errc
+	err = <-errcv
 
 	return
 }
