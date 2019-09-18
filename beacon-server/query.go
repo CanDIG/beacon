@@ -97,12 +97,6 @@ func allReferenceSets(ctx context.Context, assId string) (out []string, err erro
 
 	for len(res.GetReferenceSets()) != 0 {
 		for _, rr := range res.GetReferenceSets() {
-			select {
-			default:
-			case <-ctx.Done():
-				err = ctx.Err()
-				return
-			}
 			out = append(out, rr.GetId())
 		}
 
