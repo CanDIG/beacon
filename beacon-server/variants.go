@@ -10,8 +10,6 @@ import (
 // within the given range into a provided channel, closing it when
 // finished.
 func allVariants(ctx context.Context, dataset string, req BeaconAlleleRequest, variantsets []string, ch chan<- client.Ga4ghVariant) (err error) {
-	defer close(ch)
-
 	// omit end if it's the default 0
 	var end *string
 	if req.EndMax > 0 {
@@ -34,7 +32,6 @@ func allVariants(ctx context.Context, dataset string, req BeaconAlleleRequest, v
 			select {
 			case ch <- v:
 			case <-ctx.Done():
-				err = ctx.Err()
 				return
 			}
 		}
@@ -58,4 +55,20 @@ func allVariants(ctx context.Context, dataset string, req BeaconAlleleRequest, v
 	}
 
 	return
+}
+
+func allVariantsPipeline(ctx context.Context, dataset string, req BeaconAlleleRequest, variantsets []string) (<-chan client.Ga4ghVariant, <-chan error) {
+	out := make(chan client.Ga4ghVariant)
+	errc := make(chan error, 1)
+
+	go func() {
+		defer close(errc)
+		defer close(out)
+		select {
+		case <-ctx.Done():
+		case errc <- allVariants(ctx, dataset, req, variantsets, out):
+		}
+	}()
+
+	return out, errc
 }
