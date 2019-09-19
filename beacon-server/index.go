@@ -3,7 +3,6 @@ package server
 import (
 	"context"
 	"net/http"
-	"os"
 	"time"
 
 	client "github.com/CanDIG/beacon/candig-client"
@@ -72,9 +71,15 @@ func allDatasets(ctx context.Context) (datasets []BeaconDataset, err error) {
 }
 
 var (
-	ApiVersion = "1.0.1"
-	BeaconName = os.Getenv("BEACON_NAME")
-	BeaconId   = os.Getenv("BEACON_ID")
+	ApiVersion        = "1.0.1"
+	BeaconName        = "CanDig Beacon"
+	BeaconId          = "ca.distributedgenomics.beacon"
+	OrgId             = "CanDIG"
+	OrgName           = "Canadian Distributed Genomics"
+	OrgWelcomeUrl     = "https://www.distributedgenomics.ca"
+	OrgContactUrl     = "mailto:info@distributedgenomics.ca"
+	OrgLogoUrl        = "https://www.distributedgenomics.ca/img/logo_only.png"
+	BeaconDescription = "Beacon interface to the CanDIG genomics database."
 )
 
 func GetBeacon(c *gin.Context) {
@@ -85,10 +90,18 @@ func GetBeacon(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, Beacon{
+		WelcomeUrl: c.Request.URL.String(),
 		Name:       BeaconName,
 		Id:         BeaconId,
 		ApiVersion: ApiVersion,
 		Datasets:   datasets,
+		Organization: BeaconOrganization{
+			Id:         OrgId,
+			Name:       OrgName,
+			ContactUrl: OrgContactUrl,
+			WelcomeUrl: OrgWelcomeUrl,
+			LogoUrl:    OrgLogoUrl,
+		},
 		// todo: add more organizational metadata
 	})
 }
