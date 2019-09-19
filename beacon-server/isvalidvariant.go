@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"runtime"
 	"strconv"
 	"sync"
 
@@ -75,11 +76,23 @@ func isvalidVariant(ctx context.Context, hasVariantSets bool, variant client.Ga4
 	return true, nil
 }
 
+// number of goroutines per cpu if they block on the network
+const sleepableFactor = 100
+
 func isValidVariantPipeline(ctx context.Context, hasVariantSets bool, variantc <-chan client.Ga4ghVariant, req BeaconAlleleRequest, refvc, altvc variantChecker) (<-chan struct{}, <-chan error) {
 	out := make(chan struct{})
 	errc := make(chan error, 1)
+
+	// only run as many routines as there are cpus
+	isvalidcount := runtime.NumCPU()
+
+	// increase the number of routines if they might get stalled
+	// on waiting for the network
+	if !hasVariantSets {
+		isvalidcount *= sleepableFactor
+	}
+
 	var wg sync.WaitGroup
-	const isvalidcount = 20
 	wg.Add(isvalidcount)
 	for i := 0; i < isvalidcount; i++ {
 		go func() {
