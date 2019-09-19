@@ -1,9 +1,7 @@
 package server
 
+import "github.com/pkg/errors"
+
 const MaxWorkingStringArray = 1_000
 
-type toomany struct{}
-
-func (t toomany) Error() string {
-	return "Too many values to return."
-}
+var toomany = errors.New("Too many elements.")

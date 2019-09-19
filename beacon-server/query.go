@@ -99,7 +99,7 @@ func internalRun(ctx context.Context, req BeaconAlleleRequest) (exists bool, out
 
 	// build list of refsets
 	refsets, err := allReferenceSets(ctx, req.AssemblyId)
-	if _, ok := errors.Cause(err).(toomany); ok {
+	if errors.Cause(err) == toomany {
 		refsets, err = nil, nil
 	}
 	if err != nil {

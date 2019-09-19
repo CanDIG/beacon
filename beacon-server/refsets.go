@@ -20,7 +20,7 @@ func allReferenceSets(ctx context.Context, assId string) (out []string, err erro
 
 			// put a cap on the array we return
 			if len(out) > MaxWorkingStringArray {
-				return nil, toomany{}
+				return nil, toomany
 			}
 		}
 

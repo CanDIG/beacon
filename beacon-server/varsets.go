@@ -26,7 +26,7 @@ func allVariantSets(ctx context.Context, dataId string, refsetmap map[string]str
 
 				// cap the array we return
 				if len(variantsets) > MaxWorkingStringArray {
-					return nil, toomany{}
+					return nil, toomany
 				}
 			}
 		}

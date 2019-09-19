@@ -15,7 +15,7 @@ func countVariants(ctx context.Context, dataset string, refsetsmap map[string]st
 
 	// build list of variantsets
 	variantsets, err := allVariantSets(ctx, dataset, refsetsmap)
-	if _, ok := errors.Cause(err).(toomany); ok {
+	if errors.Cause(err) == toomany {
 		variantsets, err = nil, nil
 	}
 	if err != nil {
