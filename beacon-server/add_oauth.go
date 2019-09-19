@@ -1,22 +1,15 @@
 package server
 
 import (
-	"context"
-	"os"
-
 	client "github.com/CanDIG/beacon/candig-client"
 	"github.com/gin-gonic/gin"
 )
-
-const apiClient = "github.com/CanDIG/beacon/apiclient"
 
 var passthroughHeaders = [...]string{
 	"Authorization",
 }
 
 const xClaim = "X-Claim-"
-
-var CandigHost = os.Getenv("CANDIG_HOST")
 
 func addOauth(c *gin.Context) {
 	cfg := client.NewConfiguration()
@@ -34,10 +27,6 @@ func addOauth(c *gin.Context) {
 		}
 	}
 
-	c.Set(apiClient, client.NewAPIClient(cfg))
+	storeClientGin(c, cfg)
 	c.Next()
-}
-
-func getClient(ctx context.Context) *client.APIClient {
-	return ctx.Value(apiClient).(*client.APIClient)
 }
