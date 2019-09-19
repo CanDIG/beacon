@@ -10,7 +10,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-func isvalidVariant(ctx context.Context, hasVariantSets bool, variant client.Ga4ghVariant, req BeaconAlleleRequest, refvc, altvc variantChecker) (result bool, err error) {
+func isvalidVariant(ctx context.Context, hasVariantSets bool, variant client.Ga4ghVariant, req BeaconAlleleRequest) (result bool, err error) {
 	defer func() {
 		err = errors.WithStack(err)
 	}()
@@ -51,6 +51,10 @@ func isvalidVariant(ctx context.Context, hasVariantSets bool, variant client.Ga4
 		return
 	}
 
+	refvc, err := newVariantChecker(req.ReferenceBases)
+	if err != nil {
+		return
+	}
 	if !refvc.check(variant.GetReferenceBases()) {
 		return
 	}
@@ -61,6 +65,12 @@ func isvalidVariant(ctx context.Context, hasVariantSets bool, variant client.Ga4
 			return
 		}
 	} else {
+		var altvc variantChecker
+		altvc, err = newVariantChecker(req.ReferenceBases)
+		if err != nil {
+			return
+		}
+
 		found := false
 		for _, alt := range variant.GetAlternateBases() {
 			if altvc.check(alt) {
@@ -79,7 +89,7 @@ func isvalidVariant(ctx context.Context, hasVariantSets bool, variant client.Ga4
 // number of goroutines per cpu if they block on the network
 const sleepableFactor = 100
 
-func isValidVariantPipeline(ctx context.Context, hasVariantSets bool, variantc <-chan client.Ga4ghVariant, req BeaconAlleleRequest, refvc, altvc variantChecker) (<-chan int, <-chan error) {
+func isValidVariantPipeline(ctx context.Context, hasVariantSets bool, variantc <-chan client.Ga4ghVariant, req BeaconAlleleRequest) (<-chan int, <-chan error) {
 	out := make(chan int)
 	errc := make(chan error, 1)
 
@@ -98,7 +108,7 @@ func isValidVariantPipeline(ctx context.Context, hasVariantSets bool, variantc <
 		go func() {
 			defer wg.Done()
 			for variant := range variantc {
-				ok, err := isvalidVariant(ctx, hasVariantSets, variant, req, refvc, altvc)
+				ok, err := isvalidVariant(ctx, hasVariantSets, variant, req)
 				if err != nil {
 					errc <- err
 					return

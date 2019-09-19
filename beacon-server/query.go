@@ -114,20 +114,10 @@ func internalRun(ctx context.Context, req BeaconAlleleRequest) (exists bool, out
 		refsetsmap = nil
 	}
 
-	// setup variant checkers
-	refvc, err := newVariantChecker(req.ReferenceBases)
-	if err != nil {
-		return
-	}
-	altvc, err := newVariantChecker(req.AlternateBases)
-	if err != nil {
-		return
-	}
-
 	// loop through datasets
 	for _, dataset := range req.DatasetIds {
 		var count int
-		count, err = countVariants(ctx, dataset, refsetsmap, req, refvc, altvc)
+		count, err = countVariants(ctx, dataset, refsetsmap, req)
 		if err != nil {
 			return
 		}

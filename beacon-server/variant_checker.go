@@ -4,6 +4,7 @@ import (
 	"regexp"
 	"strings"
 
+	lru "github.com/hashicorp/golang-lru"
 	"github.com/pkg/errors"
 )
 
@@ -22,6 +23,11 @@ type variantChecker struct {
 }
 
 func newVariantChecker(expr string) (vc variantChecker, err error) {
+	if vcc, ok := variantCheckerCache.Get(expr); ok {
+		vc = vcc.(variantChecker)
+		return
+	}
+
 	if !variantCheckerChecker.MatchString(expr) {
 		err = errors.New("Invalid variant search string")
 		return
@@ -35,9 +41,21 @@ func newVariantChecker(expr string) (vc variantChecker, err error) {
 		return
 	}
 
+	variantCheckerCache.Add(expr, vc)
+
 	return
 }
 
 func (v *variantChecker) check(s string) bool {
 	return v.regex.MatchString(s)
+}
+
+var variantCheckerCache *lru.Cache
+
+func init() {
+	var err error
+	variantCheckerCache, err = lru.New(1_000)
+	if err != nil {
+		panic(err)
+	}
 }

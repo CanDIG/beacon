@@ -6,7 +6,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-func countVariants(ctx context.Context, dataset string, refsetsmap map[string]struct{}, req BeaconAlleleRequest, refvc, altvc variantChecker) (count int, err error) {
+func countVariants(ctx context.Context, dataset string, refsetsmap map[string]struct{}, req BeaconAlleleRequest) (count int, err error) {
 	defer func() {
 		err = errors.WithStack(err)
 	}()
@@ -27,7 +27,7 @@ func countVariants(ctx context.Context, dataset string, refsetsmap map[string]st
 	errcs = append(errcs, errc)
 
 	// filter out the ones that are valid
-	validc, errc := isValidVariantPipeline(ctx, variantsets != nil, varch, req, refvc, altvc)
+	validc, errc := isValidVariantPipeline(ctx, variantsets != nil, varch, req)
 	errcs = append(errcs, errc)
 
 	for i := range validc {
