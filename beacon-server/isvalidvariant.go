@@ -79,8 +79,8 @@ func isvalidVariant(ctx context.Context, hasVariantSets bool, variant client.Ga4
 // number of goroutines per cpu if they block on the network
 const sleepableFactor = 100
 
-func isValidVariantPipeline(ctx context.Context, hasVariantSets bool, variantc <-chan client.Ga4ghVariant, req BeaconAlleleRequest, refvc, altvc variantChecker) (<-chan struct{}, <-chan error) {
-	out := make(chan struct{})
+func isValidVariantPipeline(ctx context.Context, hasVariantSets bool, variantc <-chan client.Ga4ghVariant, req BeaconAlleleRequest, refvc, altvc variantChecker) (<-chan int, <-chan error) {
+	out := make(chan int)
 	errc := make(chan error, 1)
 
 	// only run as many routines as there are cpus
@@ -105,7 +105,7 @@ func isValidVariantPipeline(ctx context.Context, hasVariantSets bool, variantc <
 				}
 				if ok {
 					select {
-					case out <- struct{}{}:
+					case out <- 1:
 					case <-ctx.Done():
 						errc <- ctx.Err()
 						return

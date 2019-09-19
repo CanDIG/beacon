@@ -126,7 +126,7 @@ func internalRun(ctx context.Context, req BeaconAlleleRequest) (exists bool, out
 
 	// loop through datasets
 	for _, dataset := range req.DatasetIds {
-		var count int64
+		var count int
 		count, err = countVariants(ctx, dataset, refsetsmap, req, refvc, altvc)
 		if err != nil {
 			return
@@ -147,7 +147,7 @@ func internalRun(ctx context.Context, req BeaconAlleleRequest) (exists bool, out
 		if incl {
 			out = append(out, BeaconDatasetAlleleResponse{
 				DatasetId:    dataset,
-				VariantCount: count,
+				VariantCount: int64(count),
 				Exists:       count > 0,
 				// todo: add more fields with metadata
 			})
