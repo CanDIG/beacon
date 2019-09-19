@@ -10,5 +10,8 @@ services:
     build: .
     ports:
       - 8080/tcp
-    environment:
-      CANDIG_HOST: candig-server
+    links:
+      - candig-server:candig
+      - redis
+  redis:
+    image: redis

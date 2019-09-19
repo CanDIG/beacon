@@ -1,14 +1,11 @@
 FROM golang:1.13 AS build
-WORKDIR /go/src
-COPY . .
-
+WORKDIR /src/beacon
 ENV CGO_ENABLED=0
-RUN go get -d -v ./...
+COPY . .
+RUN go build
 
-RUN go build -a -installsuffix cgo -o openapi .
-
-FROM scratch AS runtime
+FROM scratch
 ENV GIN_MODE=release
-COPY --from=build /go/src/openapi ./
+COPY --from=build /src/beacon /
 EXPOSE 8080/tcp
-ENTRYPOINT ["./openapi"]
+ENTRYPOINT ["/beacon"]
