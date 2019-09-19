@@ -75,20 +75,7 @@ func isvalidVariant(ctx context.Context, hasVariantSets bool, variant client.Ga4
 	return true, nil
 }
 
-func isValidVariantStep(ctx context.Context, hasVariantSets bool, variantc <-chan client.Ga4ghVariant, req BeaconAlleleRequest, refvc, altvc variantChecker, out chan<- struct{}, errc chan<- error) {
-	for variant := range variantc {
-		ok, err := isvalidVariant(ctx, hasVariantSets, variant, req, refvc, altvc)
-		if err != nil {
-			errc <- err
-			return
-		}
-		if ok {
-			out <- struct{}{}
-		}
-	}
-}
-
-func isValidVariantPool(ctx context.Context, hasVariantSets bool, variantc <-chan client.Ga4ghVariant, req BeaconAlleleRequest, refvc, altvc variantChecker) (<-chan struct{}, <-chan error) {
+func isValidVariantPipeline(ctx context.Context, hasVariantSets bool, variantc <-chan client.Ga4ghVariant, req BeaconAlleleRequest, refvc, altvc variantChecker) (<-chan struct{}, <-chan error) {
 	out := make(chan struct{})
 	errc := make(chan error, 1)
 	var wg sync.WaitGroup
@@ -97,7 +84,16 @@ func isValidVariantPool(ctx context.Context, hasVariantSets bool, variantc <-cha
 	for i := 0; i < isvalidcount; i++ {
 		go func() {
 			defer wg.Done()
-			isValidVariantStep(ctx, hasVariantSets, variantc, req, refvc, altvc, out, errc)
+			for variant := range variantc {
+				ok, err := isvalidVariant(ctx, hasVariantSets, variant, req, refvc, altvc)
+				if err != nil {
+					errc <- err
+					return
+				}
+				if ok {
+					out <- struct{}{}
+				}
+			}
 		}()
 	}
 	go func() {
