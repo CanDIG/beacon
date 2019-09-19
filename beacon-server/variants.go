@@ -32,6 +32,7 @@ func allVariants(ctx context.Context, dataset string, req BeaconAlleleRequest, v
 			select {
 			case ch <- v:
 			case <-ctx.Done():
+				err = ctx.Err()
 				return
 			}
 		}
@@ -64,10 +65,7 @@ func allVariantsPipeline(ctx context.Context, dataset string, req BeaconAlleleRe
 	go func() {
 		defer close(errc)
 		defer close(out)
-		select {
-		case <-ctx.Done():
-		case errc <- allVariants(ctx, dataset, req, variantsets, out):
-		}
+		errc <- allVariants(ctx, dataset, req, variantsets, out)
 	}()
 
 	return out, errc

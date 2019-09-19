@@ -2,10 +2,8 @@ package server
 
 import "sync"
 
-// mergeerror merges error channels into one channel, remember to
-// close the channel when done reading from it
 func mergeerror(errcs ...<-chan error) <-chan error {
-	out := make(chan error)
+	out := make(chan error, len(errcs))
 	var wg sync.WaitGroup
 	wg.Add(len(errcs))
 	for _, errc := range errcs {
@@ -14,6 +12,7 @@ func mergeerror(errcs ...<-chan error) <-chan error {
 			for err := range errc {
 				if err != nil {
 					out <- err
+					return
 				}
 			}
 		}(errc)

@@ -91,7 +91,12 @@ func isValidVariantPipeline(ctx context.Context, hasVariantSets bool, variantc <
 					return
 				}
 				if ok {
-					out <- struct{}{}
+					select {
+					case out <- struct{}{}:
+					case <-ctx.Done():
+						errc <- ctx.Err()
+						return
+					}
 				}
 			}
 		}()
