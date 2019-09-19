@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"net/url"
 	"os"
 
 	client "github.com/CanDIG/beacon/candig-client"
@@ -13,20 +14,27 @@ const (
 	apiClientConfig = apiClient + "config"
 )
 
-var CandigHost = os.Getenv("CANDIG_HOST")
+var candigURL = os.Getenv("CANDIG_URL")
+
+func storeURL(cfg *client.Configuration) {
+	u, err := url.Parse(candigURL)
+	if err != nil {
+		panic(err)
+	}
+
+	cfg.Scheme = u.Scheme
+	cfg.Host = u.Host
+	cfg.BasePath = u.EscapedPath()
+}
 
 func storeClientGin(c *gin.Context, cfg *client.Configuration) {
-	if cfg.Host == "" {
-		cfg.Host = CandigHost
-	}
+	storeURL(cfg)
 	c.Set(apiClient, client.NewAPIClient(cfg))
 	c.Set(apiClientConfig, cfg)
 }
 
 func storeClientContext(ctx context.Context, cfg *client.Configuration) context.Context {
-	if cfg.Host == "" {
-		cfg.Host = CandigHost
-	}
+	storeURL(cfg)
 	ctx = context.WithValue(ctx, apiClient, client.NewAPIClient(cfg))
 	ctx = context.WithValue(ctx, apiClientConfig, cfg)
 	return ctx
