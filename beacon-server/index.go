@@ -70,7 +70,7 @@ func allDatasets(ctx context.Context) (datasets []BeaconDataset, err error) {
 	return
 }
 
-var (
+const (
 	ApiVersion        = "1.0.1"
 	BeaconName        = "CanDig Beacon"
 	BeaconId          = "ca.distributedgenomics.beacon"
