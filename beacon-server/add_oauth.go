@@ -20,7 +20,7 @@ func addOauth(c *gin.Context) {
 		}
 	}
 	for k, v := range c.Request.Header {
-		if k[:len(xClaim)] == xClaim {
+		if len(xClaim) <= len(k) && k[:len(xClaim)] == xClaim {
 			for _, v := range v {
 				cfg.AddDefaultHeader(k, v)
 			}
