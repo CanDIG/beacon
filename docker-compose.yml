@@ -5,12 +5,18 @@ services:
     build: candig-server
     ports:
       - 80/tcp
+
   beacon:
     image: beacon
     build: .
-    ports:
-      - 8080/tcp
     environment:
       CANDIG_URL: http://candig-server/
-    links:
+    depends_on:
       - candig-server
+
+  haproxy:
+    build: proxy
+    ports:
+      - 80/tcp
+    environment:
+      BACKEND: beacon:8080

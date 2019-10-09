@@ -2,45 +2,68 @@ package server
 
 import (
 	"context"
+	"log"
 	"net/http"
 	"time"
 
 	client "github.com/CanDIG/beacon/candig-client"
 	"github.com/gin-gonic/gin"
+	"github.com/pkg/errors"
 )
 
 func listDatasets(ctx context.Context, cb func(context.Context, client.Ga4ghDataset) error) (err error) {
-	res, _, err := getClient(ctx).MetadataServiceApi.SearchDatasets(ctx, client.Ga4ghSearchDatasetsRequest{})
-	if err != nil {
-		return
-	}
+	var res client.Ga4ghSearchDatasetsResponse
+	for np, ok := "", true; ok; np, ok = res.GetNextPageTokenOk() {
+		res, _, err = getClient(ctx).MetadataServiceApi.SearchDatasets(ctx, client.Ga4ghSearchDatasetsRequest{
+			PageToken: &np,
+		})
+		if err != nil {
+			s(&err)
+			return
+		}
 
-	for len(res.GetDatasets()) != 0 {
 		for _, d := range res.GetDatasets() {
 			err = cb(ctx, d)
 			if err != nil {
 				return
 			}
 		}
-		res, _, err = getClient(ctx).MetadataServiceApi.SearchDatasets(ctx, client.Ga4ghSearchDatasetsRequest{
-			PageToken: client.PtrString(res.GetNextPageToken()),
-		})
 	}
 
 	return
 }
 
+func s(errp *error) {
+	*errp = errors.WithStack(*errp)
+}
+
+type EmptyDatabase struct {
+	error
+}
+
+func (e EmptyDatabase) Error() string {
+	return e.error.Error()
+}
+
 func getAssemblyId(ctx context.Context, dataId string) (assId string, err error) {
-	vr, _, err := getClient(ctx).VariantServiceApi.SearchVariantSets(ctx, client.Ga4ghSearchVariantSetsRequest{
+	vr, sts, err := getClient(ctx).VariantServiceApi.SearchVariantSets(ctx, client.Ga4ghSearchVariantSetsRequest{
 		DatasetId: client.PtrString(dataId),
 		PageSize:  client.PtrInt32(1),
 	})
 	if err != nil {
+		if sts.StatusCode == http.StatusNotFound {
+			err = EmptyDatabase{errors.WithMessage(err, "no variant sets found")}
+		}
+		s(&err)
 		return
 	}
 
-	rr, _, err := getClient(ctx).ReferenceServiceApi.GetReferenceSet(ctx, vr.GetVariantSets()[0].GetReferenceSetId())
+	rr, sts, err := getClient(ctx).ReferenceServiceApi.GetReferenceSet(ctx, vr.GetVariantSets()[0].GetReferenceSetId())
 	if err != nil {
+		if sts.StatusCode == http.StatusNotFound {
+			err = EmptyDatabase{errors.WithMessage(err, "no reference sets found")}
+		}
+		s(&err)
 		return
 	}
 
@@ -54,6 +77,9 @@ func allDatasets(ctx context.Context) (datasets []BeaconDataset, err error) {
 	err = listDatasets(ctx, func(ctx context.Context, d client.Ga4ghDataset) (err error) {
 		assId, err := getAssemblyId(ctx, d.GetId())
 		if err != nil {
+			if _, ok := errors.Cause(err).(EmptyDatabase); ok {
+				err = nil
+			}
 			return
 		}
 
@@ -85,6 +111,7 @@ const (
 func GetBeacon(c *gin.Context) {
 	datasets, err := allDatasets(c)
 	if err != nil {
+		log.Printf("%+v\n", err)
 		c.AbortWithError(http.StatusInternalServerError, err)
 		return
 	}

@@ -22,9 +22,25 @@ func storeURL(cfg *client.Configuration) {
 		panic(err)
 	}
 
+	// not sure why an empty url results in silence from
+	// everything but oh well
+	if u == nil {
+		panic("No CANDIG_URL")
+	}
+
 	cfg.Scheme = u.Scheme
 	cfg.Host = u.Host
 	cfg.BasePath = u.EscapedPath()
+
+	// add header to disable federation and expose the underlying
+	// openapi code as needed
+	cfg.AddDefaultHeader("X-No-Federation", "yes")
+
+	// strip slashes from the end because our client doesn't like
+	// them at all
+	for len(cfg.BasePath) > 0 && cfg.BasePath[len(cfg.BasePath)-1] == '/' {
+		cfg.BasePath = cfg.BasePath[:len(cfg.BasePath)-1]
+	}
 }
 
 func storeClientGin(c *gin.Context, cfg *client.Configuration) {
