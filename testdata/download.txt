@@ -1,0 +1,3 @@
+http://ftp-trace.ncbi.nlm.nih.gov/1000genomes/ftp/technical/reference/human_g1k_v37.fasta.fai
+http://ftp-trace.ncbi.nlm.nih.gov/1000genomes/ftp/technical/reference/human_g1k_v37.fasta.gz
+http://ftp-trace.ncbi.nlm.nih.gov/1000genomes/ftp/technical/working/20130718_phase3_samples_cortex_graphs/per_sample_vcfs/HG00[100-120].vcf.gz

@@ -7,3 +7,4 @@
 [submodule "candig-server"]
 	path = candig-server
 	url = https://github.com/CanDIG/candig-server
+	branch = beacon-patches

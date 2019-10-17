@@ -1,0 +1,5 @@
+*.vcf
+*.fasta
+*.gz
+*.fai
+*.tbi

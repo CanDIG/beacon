@@ -1,7 +1,11 @@
 package server
 
 import (
+	"bytes"
 	"context"
+	"fmt"
+	"io/ioutil"
+	"net/http"
 	"net/url"
 	"os"
 
@@ -15,6 +19,24 @@ const (
 )
 
 var candigURL = os.Getenv("CANDIG_URL")
+
+type loggingRoundtripper struct{}
+
+func (l loggingRoundtripper) RoundTrip(req *http.Request) (*http.Response, error) {
+	fmt.Println(req)
+	res, err := http.DefaultTransport.RoundTrip(req)
+	fmt.Println(res)
+	if err != nil {
+		return res, err
+	}
+	data, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		return res, err
+	}
+	res.Body = ioutil.NopCloser(bytes.NewBuffer(data))
+	fmt.Println(string(data))
+	return res, err
+}
 
 func storeURL(cfg *client.Configuration) {
 	u, err := url.Parse(candigURL)
@@ -31,6 +53,13 @@ func storeURL(cfg *client.Configuration) {
 	cfg.Scheme = u.Scheme
 	cfg.Host = u.Host
 	cfg.BasePath = u.EscapedPath()
+
+	if os.Getenv("BEACON_VERBOSE") != "" {
+		// log all http requests
+		cfg.HTTPClient = &http.Client{
+			Transport: loggingRoundtripper{},
+		}
+	}
 
 	// add header to disable federation and expose the underlying
 	// openapi code as needed

@@ -1,13 +1,14 @@
 version: '3.0'
 services:
   candig-server:
-    image: candig-server
     build: candig-server
     ports:
       - 80/tcp
+    volumes:
+      - ${SRCDIR:-.}/testdata:/moredata
+      - /data
 
   beacon:
-    image: beacon
     build: .
     environment:
       CANDIG_URL: http://candig-server/

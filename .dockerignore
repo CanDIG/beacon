@@ -6,3 +6,8 @@
 /candig-server/
 /api/
 /*.sh
+/testdata
+/.env
+/.dockerignore
+.gitignore
+/.git/
