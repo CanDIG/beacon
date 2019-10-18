@@ -5,7 +5,7 @@ services:
     ports:
       - 80/tcp
     volumes:
-      - ${SRCDIR:-.}/testdata:/moredata
+      - ./testdata:/moredata
       - /data
 
   beacon:
