@@ -8,21 +8,21 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// This request maps to the body of 'POST /rnaquantificationsets/search' as JSON.
+// Ga4ghSearchRnaQuantificationSetsRequest This request maps to the body of 'POST /rnaquantificationsets/search' as JSON.
 type Ga4ghSearchRnaQuantificationSetsRequest struct {
 	// The `Dataset` to search.
-	DatasetId *string `json:"dataset_id,omitempty"`
+	DatasetId *string `json:"datasetId,omitempty"`
 
 	// Specifies the maximum number of results to return in a single page. If unspecified, a system default will be used.
 	PageSize *int32 `json:"page_size,omitempty"`
 
 	// The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of 'nextPageToken' from the previous response.
 	PageToken *string `json:"page_token,omitempty"`
-
 }
 
 // GetDatasetId returns the DatasetId field if non-nil, zero value otherwise.
@@ -124,11 +124,11 @@ func (o *Ga4ghSearchRnaQuantificationSetsRequest) SetPageToken(v string) {
 	o.PageToken = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchRnaQuantificationSetsRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.DatasetId != nil {
-		toSerialize["dataset_id"] = o.DatasetId
+		toSerialize["datasetId"] = o.DatasetId
 	}
 	if o.PageSize != nil {
 		toSerialize["page_size"] = o.PageSize
@@ -138,5 +138,3 @@ func (o Ga4ghSearchRnaQuantificationSetsRequest) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

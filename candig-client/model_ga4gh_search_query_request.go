@@ -8,12 +8,14 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
+// Ga4ghSearchQueryRequest struct for Ga4ghSearchQueryRequest
 type Ga4ghSearchQueryRequest struct {
-	DatasetId *string `json:"dataset_id,omitempty"`
+	DatasetId *string `json:"datasetId,omitempty"`
 
 	Logic *Ga4ghLogic `json:"logic,omitempty"`
 
@@ -28,7 +30,6 @@ type Ga4ghSearchQueryRequest struct {
 
 	// The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of `nextPageToken` from the previous response.
 	PageToken *string `json:"page_token,omitempty"`
-
 }
 
 // GetDatasetId returns the DatasetId field if non-nil, zero value otherwise.
@@ -262,11 +263,11 @@ func (o *Ga4ghSearchQueryRequest) SetPageToken(v string) {
 	o.PageToken = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchQueryRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.DatasetId != nil {
-		toSerialize["dataset_id"] = o.DatasetId
+		toSerialize["datasetId"] = o.DatasetId
 	}
 	if o.Logic != nil {
 		toSerialize["logic"] = o.Logic
@@ -288,5 +289,3 @@ func (o Ga4ghSearchQueryRequest) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

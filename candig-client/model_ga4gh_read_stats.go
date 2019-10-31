@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// ReadStats can be used to provide summary statistics about read data.
+// Ga4ghReadStats ReadStats can be used to provide summary statistics about read data.
 type Ga4ghReadStats struct {
 	// The number of aligned reads.
 	AlignedReadCount *string `json:"aligned_read_count,omitempty"`
@@ -22,7 +23,6 @@ type Ga4ghReadStats struct {
 
 	// The total number of bases. This is equivalent to the sum of `alignedSequence.length` for all reads.
 	BaseCount *string `json:"base_count,omitempty"`
-
 }
 
 // GetAlignedReadCount returns the AlignedReadCount field if non-nil, zero value otherwise.
@@ -124,7 +124,7 @@ func (o *Ga4ghReadStats) SetBaseCount(v string) {
 	o.BaseCount = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghReadStats) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.AlignedReadCount != nil {
@@ -138,5 +138,3 @@ func (o Ga4ghReadStats) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// This request maps to the body of `POST /continuous/search` as JSON.
+// Ga4ghSearchContinuousRequest This request maps to the body of `POST /continuous/search` as JSON.
 type Ga4ghSearchContinuousRequest struct {
 	// The annotation set to search within. Required value.
 	ContinuousSetId *string `json:"continuous_set_id,omitempty"`
@@ -31,7 +32,6 @@ type Ga4ghSearchContinuousRequest struct {
 
 	// The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of `next_page_token` from the previous response.
 	PageToken *string `json:"page_token,omitempty"`
-
 }
 
 // GetContinuousSetId returns the ContinuousSetId field if non-nil, zero value otherwise.
@@ -232,7 +232,7 @@ func (o *Ga4ghSearchContinuousRequest) SetPageToken(v string) {
 	o.PageToken = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchContinuousRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ContinuousSetId != nil {
@@ -255,5 +255,3 @@ func (o Ga4ghSearchContinuousRequest) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

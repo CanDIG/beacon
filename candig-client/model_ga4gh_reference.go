@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// A `Reference` is a canonical assembled contig, intended to act as a reference coordinate space for other genomic annotations. A single `Reference` might represent the human chromosome 1, for instance.  `Reference` s are designed to be immutable.
+// Ga4ghReference A `Reference` is a canonical assembled contig, intended to act as a reference coordinate space for other genomic annotations. A single `Reference` might represent the human chromosome 1, for instance.  `Reference` s are designed to be immutable.
 type Ga4ghReference struct {
 	// The reference ID. Unique within the repository.
 	Id *string `json:"id,omitempty"`
@@ -39,7 +40,6 @@ type Ga4ghReference struct {
 	SourceDivergence *float32 `json:"source_divergence,omitempty"`
 
 	Species *Ga4ghOntologyTerm `json:"species,omitempty"`
-
 }
 
 // GetId returns the Id field if non-nil, zero value otherwise.
@@ -339,7 +339,7 @@ func (o *Ga4ghReference) SetSpecies(v Ga4ghOntologyTerm) {
 	o.Species = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghReference) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -371,5 +371,3 @@ func (o Ga4ghReference) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

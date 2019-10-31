@@ -8,27 +8,27 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// This request maps to the body of `POST /readgroupsets/search` as JSON.  TODO: Factor this out to a common API patterns section. - If searching by a resource ID, and that resource is not found, the method   will return a `404` HTTP status code (`NOT_FOUND`). - If searching by other attributes, e.g. `name`, and no matches are found, the   method will return a `200` HTTP status code (`OK`) with an empty result list.
+// Ga4ghSearchReadGroupSetsRequest This request maps to the body of `POST /readgroupsets/search` as JSON.  TODO: Factor this out to a common API patterns section. - If searching by a resource ID, and that resource is not found, the method   will return a `404` HTTP status code (`NOT_FOUND`). - If searching by other attributes, e.g. `name`, and no matches are found, the   method will return a `200` HTTP status code (`OK`) with an empty result list.
 type Ga4ghSearchReadGroupSetsRequest struct {
 	// The dataset to search.
-	DatasetId *string `json:"dataset_id,omitempty"`
+	DatasetId *string `json:"datasetId,omitempty"`
 
 	// Only return read group sets with this name (case-sensitive, exact match).
 	Name *string `json:"name,omitempty"`
 
 	// Specifying the id of a Biosample record will return only readgroups  with the given biosampleId.
-	BiosampleId *string `json:"biosample_id,omitempty"`
+	BiosampleId *string `json:"biosampleId,omitempty"`
 
 	// Specifies the maximum number of results to return in a single page. If unspecified, a system default will be used.
 	PageSize *int32 `json:"page_size,omitempty"`
 
 	// The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of `next_page_token` from the previous response.
 	PageToken *string `json:"page_token,omitempty"`
-
 }
 
 // GetDatasetId returns the DatasetId field if non-nil, zero value otherwise.
@@ -196,17 +196,17 @@ func (o *Ga4ghSearchReadGroupSetsRequest) SetPageToken(v string) {
 	o.PageToken = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchReadGroupSetsRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.DatasetId != nil {
-		toSerialize["dataset_id"] = o.DatasetId
+		toSerialize["datasetId"] = o.DatasetId
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
 	if o.BiosampleId != nil {
-		toSerialize["biosample_id"] = o.BiosampleId
+		toSerialize["biosampleId"] = o.BiosampleId
 	}
 	if o.PageSize != nil {
 		toSerialize["page_size"] = o.PageSize
@@ -216,5 +216,3 @@ func (o Ga4ghSearchReadGroupSetsRequest) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

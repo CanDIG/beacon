@@ -8,10 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
+// Ga4ghResult struct for Ga4ghResult
 type Ga4ghResult struct {
 	Table *string `json:"table,omitempty"`
 
@@ -29,7 +31,6 @@ type Ga4ghResult struct {
 
 	// List of fields to aggregate by and return counts. Overrides response format if included.
 	Count *[]string `json:"count,omitempty"`
-
 }
 
 // GetTable returns the Table field if non-nil, zero value otherwise.
@@ -263,7 +264,7 @@ func (o *Ga4ghResult) SetCount(v []string) {
 	o.Count = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghResult) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Table != nil {
@@ -289,5 +290,3 @@ func (o Ga4ghResult) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

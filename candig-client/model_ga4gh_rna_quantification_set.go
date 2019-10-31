@@ -8,21 +8,21 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// A collection of associated RNAQuantifications.  Typically this will be all the Quantifications of samples from an experiment.  For example, a time course experiment would be described by a RnaQuantificationSet with the individual RNASeq experiments of the time point being represented as the member RnaQuantifications.
+// Ga4ghRnaQuantificationSet A collection of associated RNAQuantifications.  Typically this will be all the Quantifications of samples from an experiment.  For example, a time course experiment would be described by a RnaQuantificationSet with the individual RNASeq experiments of the time point being represented as the member RnaQuantifications.
 type Ga4ghRnaQuantificationSet struct {
 	// The RNA quantification set ID.
 	Id *string `json:"id,omitempty"`
 
 	// The ID of the dataset this RNA Quantification set belongs to.
-	DatasetId *string `json:"dataset_id,omitempty"`
+	DatasetId *string `json:"datasetId,omitempty"`
 
 	// The RNA quantification set name.
 	Name *string `json:"name,omitempty"`
-
 }
 
 // GetId returns the Id field if non-nil, zero value otherwise.
@@ -124,19 +124,17 @@ func (o *Ga4ghRnaQuantificationSet) SetName(v string) {
 	o.Name = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghRnaQuantificationSet) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
 	}
 	if o.DatasetId != nil {
-		toSerialize["dataset_id"] = o.DatasetId
+		toSerialize["datasetId"] = o.DatasetId
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
 	return json.Marshal(toSerialize)
 }
-
-

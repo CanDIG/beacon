@@ -8,18 +8,18 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// This request maps to the body of `POST /datasets/search` as JSON.
+// Ga4ghSearchDatasetsRequest This request maps to the body of `POST /datasets/search` as JSON.
 type Ga4ghSearchDatasetsRequest struct {
 	// Specifies the maximum number of results to return in a single page. If unspecified, a system default will be used.
 	PageSize *int32 `json:"page_size,omitempty"`
 
 	// The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of `next_page_token` from the previous response.
 	PageToken *string `json:"page_token,omitempty"`
-
 }
 
 // GetPageSize returns the PageSize field if non-nil, zero value otherwise.
@@ -88,7 +88,7 @@ func (o *Ga4ghSearchDatasetsRequest) SetPageToken(v string) {
 	o.PageToken = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchDatasetsRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.PageSize != nil {
@@ -99,5 +99,3 @@ func (o Ga4ghSearchDatasetsRequest) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

@@ -8,14 +8,15 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// AlignmentThis request maps to the body of `POST /alignments/search` as JSON.
+// Ga4ghSearchAlignmentsRequest AlignmentThis request maps to the body of `POST /alignments/search` as JSON.
 type Ga4ghSearchAlignmentsRequest struct {
 	// Optionally specify the dataset to search within.
-	DatasetId *string `json:"dataset_id,omitempty"`
+	DatasetId *string `json:"datasetId,omitempty"`
 
 	// Returns Alignments with the given name found by case-sensitive string matching.
 	Name *string `json:"name,omitempty"`
@@ -29,7 +30,6 @@ type Ga4ghSearchAlignmentsRequest struct {
 	PageToken *string `json:"page_token,omitempty"`
 
 	Filters *[]Ga4ghFilter `json:"filters,omitempty"`
-
 }
 
 // GetDatasetId returns the DatasetId field if non-nil, zero value otherwise.
@@ -230,11 +230,11 @@ func (o *Ga4ghSearchAlignmentsRequest) SetFilters(v []Ga4ghFilter) {
 	o.Filters = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchAlignmentsRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.DatasetId != nil {
-		toSerialize["dataset_id"] = o.DatasetId
+		toSerialize["datasetId"] = o.DatasetId
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
@@ -253,5 +253,3 @@ func (o Ga4ghSearchAlignmentsRequest) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

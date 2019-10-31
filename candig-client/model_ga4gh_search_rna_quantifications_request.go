@@ -8,17 +8,18 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// This request maps to the body of 'POST /rnaquantifications/search' as JSON.
+// Ga4ghSearchRnaQuantificationsRequest This request maps to the body of 'POST /rnaquantifications/search' as JSON.
 type Ga4ghSearchRnaQuantificationsRequest struct {
 	// Return only Rna Quantifications which belong to this set. Must be specified.
 	RnaQuantificationSetId *string `json:"rna_quantification_set_id,omitempty"`
 
 	// Return only RNA quantifications regarding the specified biosample. Optional.
-	BiosampleId *string `json:"biosample_id,omitempty"`
+	BiosampleId *string `json:"biosampleId,omitempty"`
 
 	// Specifies the maximum number of results to return in a single page. If unspecified, a system default will be used.
 	PageSize *int32 `json:"page_size,omitempty"`
@@ -31,7 +32,6 @@ type Ga4ghSearchRnaQuantificationsRequest struct {
 
 	// Return only RNA quantifications related to the specified patientId.
 	PatientId *string `json:"patientId,omitempty"`
-
 }
 
 // GetRnaQuantificationSetId returns the RnaQuantificationSetId field if non-nil, zero value otherwise.
@@ -232,14 +232,14 @@ func (o *Ga4ghSearchRnaQuantificationsRequest) SetPatientId(v string) {
 	o.PatientId = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchRnaQuantificationsRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.RnaQuantificationSetId != nil {
 		toSerialize["rna_quantification_set_id"] = o.RnaQuantificationSetId
 	}
 	if o.BiosampleId != nil {
-		toSerialize["biosample_id"] = o.BiosampleId
+		toSerialize["biosampleId"] = o.BiosampleId
 	}
 	if o.PageSize != nil {
 		toSerialize["page_size"] = o.PageSize
@@ -255,5 +255,3 @@ func (o Ga4ghSearchRnaQuantificationsRequest) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// A `Variant` represents a change in DNA sequence relative to some reference. For example, a variant could represent a SNP or an insertion. Variants belong to a `VariantSet`. This is equivalent to a row in VCF.
+// Ga4ghVariant A `Variant` represents a change in DNA sequence relative to some reference. For example, a variant could represent a SNP or an insertion. Variants belong to a `VariantSet`. This is equivalent to a row in VCF.
 type Ga4ghVariant struct {
 	// The variant ID.
 	Id *string `json:"id,omitempty"`
@@ -67,7 +68,6 @@ type Ga4ghVariant struct {
 
 	// Patient_Id, this field is not populated in the database, but generated on-the-fly when variants are being returned.
 	PatientId *string `json:"patientId,omitempty"`
-
 }
 
 // GetId returns the Id field if non-nil, zero value otherwise.
@@ -730,7 +730,7 @@ func (o *Ga4ghVariant) SetPatientId(v string) {
 	o.PatientId = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghVariant) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -795,5 +795,3 @@ func (o Ga4ghVariant) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

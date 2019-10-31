@@ -8,16 +8,18 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
+// Ga4ghConsent struct for Ga4ghConsent
 type Ga4ghConsent struct {
 	// This is unique in the context of the server instance.
 	Id *string `json:"id,omitempty"`
 
 	// The ID of the dataset this object belongs to.
-	DatasetId *string `json:"dataset_id,omitempty"`
+	DatasetId *string `json:"datasetId,omitempty"`
 
 	// This is a label or symbolic identifier for this object.
 	Name *string `json:"name,omitempty"`
@@ -70,7 +72,6 @@ type Ga4ghConsent struct {
 	ReasonForConsentWithdrawal *string `json:"reasonForConsentWithdrawal,omitempty"`
 
 	ConsentFormComplete *string `json:"consentFormComplete,omitempty"`
-
 }
 
 // GetId returns the Id field if non-nil, zero value otherwise.
@@ -931,14 +932,14 @@ func (o *Ga4ghConsent) SetConsentFormComplete(v string) {
 	o.ConsentFormComplete = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghConsent) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
 	}
 	if o.DatasetId != nil {
-		toSerialize["dataset_id"] = o.DatasetId
+		toSerialize["datasetId"] = o.DatasetId
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
@@ -1014,5 +1015,3 @@ func (o Ga4ghConsent) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

@@ -8,14 +8,15 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-//  Sample  This request maps to the body of `POST /samples/search` as JSON.
+// Ga4ghSearchSamplesRequest  Sample  This request maps to the body of `POST /samples/search` as JSON.
 type Ga4ghSearchSamplesRequest struct {
 	// Optionally specify the dataset to search within.
-	DatasetId *string `json:"dataset_id,omitempty"`
+	DatasetId *string `json:"datasetId,omitempty"`
 
 	// Returns Samples with the given name found by case-sensitive string matching.
 	Name *string `json:"name,omitempty"`
@@ -27,7 +28,6 @@ type Ga4ghSearchSamplesRequest struct {
 
 	// The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of `nextPageToken` from the previous response.
 	PageToken *string `json:"page_token,omitempty"`
-
 }
 
 // GetDatasetId returns the DatasetId field if non-nil, zero value otherwise.
@@ -195,11 +195,11 @@ func (o *Ga4ghSearchSamplesRequest) SetPageToken(v string) {
 	o.PageToken = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchSamplesRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.DatasetId != nil {
-		toSerialize["dataset_id"] = o.DatasetId
+		toSerialize["datasetId"] = o.DatasetId
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
@@ -215,5 +215,3 @@ func (o Ga4ghSearchSamplesRequest) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

@@ -8,18 +8,18 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// This is the response from `POST /referencesets/search` expressed as JSON.
+// Ga4ghSearchReferenceSetsResponse This is the response from `POST /referencesets/search` expressed as JSON.
 type Ga4ghSearchReferenceSetsResponse struct {
 	// The list of matching reference sets.
 	ReferenceSets *[]Ga4ghReferenceSet `json:"reference_sets,omitempty"`
 
 	// The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results.
 	NextPageToken *string `json:"next_page_token,omitempty"`
-
 }
 
 // GetReferenceSets returns the ReferenceSets field if non-nil, zero value otherwise.
@@ -88,7 +88,7 @@ func (o *Ga4ghSearchReferenceSetsResponse) SetNextPageToken(v string) {
 	o.NextPageToken = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchReferenceSetsResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ReferenceSets != nil {
@@ -99,5 +99,3 @@ func (o Ga4ghSearchReferenceSetsResponse) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

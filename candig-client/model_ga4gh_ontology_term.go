@@ -8,17 +8,18 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
+// Ga4ghOntologyTerm struct for Ga4ghOntologyTerm
 type Ga4ghOntologyTerm struct {
 	// Ontology term identifier - the CURIE for an ontology term. It differs from the standard GA4GH schema's :ref:`id <apidesign_object_ids>` in that it is a CURIE pointing to an information resource outside of the scope of the schema or its resource implementation.
 	TermId *string `json:"term_id,omitempty"`
 
 	// Ontology term - the label of the ontology term the termId is pointing to.
 	Term *string `json:"term,omitempty"`
-
 }
 
 // GetTermId returns the TermId field if non-nil, zero value otherwise.
@@ -87,7 +88,7 @@ func (o *Ga4ghOntologyTerm) SetTerm(v string) {
 	o.Term = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghOntologyTerm) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.TermId != nil {
@@ -98,5 +99,3 @@ func (o Ga4ghOntologyTerm) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

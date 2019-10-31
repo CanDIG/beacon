@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// Each read alignment describes an alignment with additional information about the fragment and the read. A read alignment object is equivalent to a line in a SAM file.
+// Ga4ghReadAlignment Each read alignment describes an alignment with additional information about the fragment and the read. A read alignment object is equivalent to a line in a SAM file.
 type Ga4ghReadAlignment struct {
 	// The read alignment ID. This ID is unique within the read group this alignment belongs to.  For performance reasons, this field may be omitted by a backend. If provided, its intended use is to make caching and UI display easier for genome browsers and other lightweight clients.
 	Id *string `json:"id,omitempty"`
@@ -55,7 +56,6 @@ type Ga4ghReadAlignment struct {
 	AlignedQuality *[]int32 `json:"aligned_quality,omitempty"`
 
 	NextMatePosition *Ga4ghPosition `json:"next_mate_position,omitempty"`
-
 }
 
 // GetId returns the Id field if non-nil, zero value otherwise.
@@ -553,7 +553,7 @@ func (o *Ga4ghReadAlignment) SetNextMatePosition(v Ga4ghPosition) {
 	o.NextMatePosition = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghReadAlignment) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -603,5 +603,3 @@ func (o Ga4ghReadAlignment) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

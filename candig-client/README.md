@@ -23,7 +23,7 @@ go get github.com/antihax/optional
 Put the package under your project folder and add the following in import:
 
 ```golang
-import "./openapi"
+import sw "./openapi"
 ```
 
 ## Documentation for API Endpoints
@@ -66,7 +66,7 @@ Class | Method | HTTP request | Description
 *ClinicalMetadataServiceApi* | [**SearchSurgeries**](docs/ClinicalMetadataServiceApi.md#searchsurgeries) | **Post** /surgeries/search |  Gets a list of Surgeries accessible through the API. 
 *ClinicalMetadataServiceApi* | [**SearchTreatments**](docs/ClinicalMetadataServiceApi.md#searchtreatments) | **Post** /treatments/search |  Gets a list of Treatments accessible through the API. 
 *ClinicalMetadataServiceApi* | [**SearchTumourboards**](docs/ClinicalMetadataServiceApi.md#searchtumourboards) | **Post** /tumourboards/search |  Gets a list of Tumourboards accessible through the API. 
-*MetadataServiceApi* | [**GetDataset**](docs/MetadataServiceApi.md#getdataset) | **Get** /datasets/{dataset_id} | Gets a &#x60;Dataset&#x60; by ID.
+*MetadataServiceApi* | [**GetDataset**](docs/MetadataServiceApi.md#getdataset) | **Get** /datasets/{datasetId} | Gets a &#x60;Dataset&#x60; by ID.
 *MetadataServiceApi* | [**SearchDatasets**](docs/MetadataServiceApi.md#searchdatasets) | **Post** /datasets/search | Gets a list of &#x60;Dataset&#x60; matching the search criteria.
 *PipelineMetadataServiceApi* | [**GetAlignment**](docs/PipelineMetadataServiceApi.md#getalignment) | **Get** /alignments/{alignment_id} | Gets &#x60;Alignment&#x60; by ID.
 *PipelineMetadataServiceApi* | [**GetExpressionAnalysis**](docs/PipelineMetadataServiceApi.md#getexpressionanalysis) | **Get** /expressionanalysis/{expressionanalysis_id} | Gets &#x60;ExpressionAnalysis&#x60; by ID.

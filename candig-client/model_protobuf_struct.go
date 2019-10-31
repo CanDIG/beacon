@@ -8,15 +8,15 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// `Struct` represents a structured data value, consisting of fields which map to dynamically typed values. In some languages, `Struct` might be supported by a native representation. For example, in scripting languages like JS a struct is represented as an object. The details of that representation are described together with the proto support for the language.  The JSON representation for `Struct` is JSON object.
+// ProtobufStruct `Struct` represents a structured data value, consisting of fields which map to dynamically typed values. In some languages, `Struct` might be supported by a native representation. For example, in scripting languages like JS a struct is represented as an object. The details of that representation are described together with the proto support for the language.  The JSON representation for `Struct` is JSON object.
 type ProtobufStruct struct {
 	// Unordered map of dynamically typed values.
 	Fields *map[string]ProtobufValue `json:"fields,omitempty"`
-
 }
 
 // GetFields returns the Fields field if non-nil, zero value otherwise.
@@ -52,7 +52,7 @@ func (o *ProtobufStruct) SetFields(v map[string]ProtobufValue) {
 	o.Fields = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o ProtobufStruct) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Fields != nil {
@@ -60,5 +60,3 @@ func (o ProtobufStruct) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

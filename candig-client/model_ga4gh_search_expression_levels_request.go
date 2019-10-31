@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// ****************  /expressionlevels/search  ******************* This request maps to the body of 'POST /expressionlevels/search' as JSON.
+// Ga4ghSearchExpressionLevelsRequest ****************  /expressionlevels/search  ******************* This request maps to the body of 'POST /expressionlevels/search' as JSON.
 type Ga4ghSearchExpressionLevelsRequest struct {
 	// The rnaQuantification to restrict search to.
 	RnaQuantificationId *string `json:"rna_quantification_id,omitempty"`
@@ -27,7 +28,6 @@ type Ga4ghSearchExpressionLevelsRequest struct {
 
 	// The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of 'nextPageToken' from the previous response.
 	PageToken *string `json:"page_token,omitempty"`
-
 }
 
 // GetRnaQuantificationId returns the RnaQuantificationId field if non-nil, zero value otherwise.
@@ -195,7 +195,7 @@ func (o *Ga4ghSearchExpressionLevelsRequest) SetPageToken(v string) {
 	o.PageToken = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchExpressionLevelsRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.RnaQuantificationId != nil {
@@ -215,5 +215,3 @@ func (o Ga4ghSearchExpressionLevelsRequest) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

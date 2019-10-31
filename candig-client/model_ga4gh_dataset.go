@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// A Dataset is a collection of related data of multiple types. Data providers decide how to group data into datasets. See [Metadata API](../api/metadata.html) for a more detailed discussion.
+// Ga4ghDataset A Dataset is a collection of related data of multiple types. Data providers decide how to group data into datasets. See [Metadata API](../api/metadata.html) for a more detailed discussion.
 type Ga4ghDataset struct {
 	// The dataset's id, locally unique to the server instance.
 	Id *string `json:"id,omitempty"`
@@ -22,7 +23,6 @@ type Ga4ghDataset struct {
 
 	// Additional, human-readable information on the dataset.
 	Description *string `json:"description,omitempty"`
-
 }
 
 // GetId returns the Id field if non-nil, zero value otherwise.
@@ -124,7 +124,7 @@ func (o *Ga4ghDataset) SetDescription(v string) {
 	o.Description = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghDataset) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -138,5 +138,3 @@ func (o Ga4ghDataset) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

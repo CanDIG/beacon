@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// A `Call` represents the determination of genotype with respect to a particular `Variant`.  It may include associated information such as quality and phasing. For example, a call might assign a probability of 0.32 to the occurrence of a SNP named rs1234 in a call set with the name NA12345.
+// Ga4ghCall A `Call` represents the determination of genotype with respect to a particular `Variant`.  It may include associated information such as quality and phasing. For example, a call might assign a probability of 0.32 to the occurrence of a SNP named rs1234 in a call set with the name NA12345.
 type Ga4ghCall struct {
 	// The name of the call set this variant call belongs to. If this field is not present, the ordering of the call sets from a `SearchCallSetsRequest` over this `VariantSet` is guaranteed to match the ordering of the calls on this `Variant`. The number of results will also be the same.
 	CallSetName *string `json:"call_set_name,omitempty"`
@@ -29,7 +30,6 @@ type Ga4ghCall struct {
 	GenotypeLikelihood *[]float64 `json:"genotype_likelihood,omitempty"`
 
 	Attributes *Ga4ghAttributes `json:"attributes,omitempty"`
-
 }
 
 // GetCallSetName returns the CallSetName field if non-nil, zero value otherwise.
@@ -230,7 +230,7 @@ func (o *Ga4ghCall) SetAttributes(v Ga4ghAttributes) {
 	o.Attributes = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghCall) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.CallSetName != nil {
@@ -253,5 +253,3 @@ func (o Ga4ghCall) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

@@ -8,6 +8,8 @@
  */
 
 package client
+
+// Ga4ghExpressionUnit the model 'Ga4ghExpressionUnit'
 type Ga4ghExpressionUnit string
 
 // List of ga4ghExpressionUnit
@@ -17,4 +19,3 @@ const (
 	TPM Ga4ghExpressionUnit = "TPM"
 	RPKM Ga4ghExpressionUnit = "RPKM"
 )
-

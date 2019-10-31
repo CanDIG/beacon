@@ -8,10 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
+// Ga4ghExternalIdentifier struct for Ga4ghExternalIdentifier
 type Ga4ghExternalIdentifier struct {
 	// The source of the identifier, e.g. `Ensembl`.
 	Database *string `json:"database,omitempty"`
@@ -21,7 +23,6 @@ type Ga4ghExternalIdentifier struct {
 
 	// The version of the object or the database, e.g. `78`.
 	Version *string `json:"version,omitempty"`
-
 }
 
 // GetDatabase returns the Database field if non-nil, zero value otherwise.
@@ -123,7 +124,7 @@ func (o *Ga4ghExternalIdentifier) SetVersion(v string) {
 	o.Version = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghExternalIdentifier) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Database != nil {
@@ -137,5 +138,3 @@ func (o Ga4ghExternalIdentifier) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

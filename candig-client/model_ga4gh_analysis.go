@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// An analysis contains an interpretation of one or several experiments. (e.g. SNVs, copy number variations, methylation status) together with information about the methodology used.
+// Ga4ghAnalysis An analysis contains an interpretation of one or several experiments. (e.g. SNVs, copy number variations, methylation status) together with information about the methodology used.
 type Ga4ghAnalysis struct {
 	// Formats of id | name | description | accessions are described in the documentation on general attributes and formats.
 	Id *string `json:"id,omitempty"`
@@ -34,14 +35,13 @@ type Ga4ghAnalysis struct {
 	Software *[]string `json:"software,omitempty"`
 
 	// ### ===================================================================== ### # PROFYLE MODIFICATION BEGIN ### ===================================================================== ### The ID of the dataset this Analysis belongs to.
-	DatasetId *string `json:"dataset_id,omitempty"`
+	DatasetId *string `json:"datasetId,omitempty"`
 
-	ExperimentId *string `json:"experiment_id,omitempty"`
+	ExperimentId *string `json:"experimentId,omitempty"`
 
-	OtherAnalysisDescriptor *string `json:"other_analysis_descriptor,omitempty"`
+	OtherAnalysisDescriptor *string `json:"otherAnalysisDescriptor,omitempty"`
 
-	OtherAnalysisCompletitionDate *string `json:"other_analysis_completition_date,omitempty"`
-
+	OtherAnalysisCompletitionDate *string `json:"otherAnalysisCompletitionDate,omitempty"`
 }
 
 // GetId returns the Id field if non-nil, zero value otherwise.
@@ -407,7 +407,7 @@ func (o *Ga4ghAnalysis) SetOtherAnalysisCompletitionDate(v string) {
 	o.OtherAnalysisCompletitionDate = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghAnalysis) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -432,18 +432,16 @@ func (o Ga4ghAnalysis) MarshalJSON() ([]byte, error) {
 		toSerialize["software"] = o.Software
 	}
 	if o.DatasetId != nil {
-		toSerialize["dataset_id"] = o.DatasetId
+		toSerialize["datasetId"] = o.DatasetId
 	}
 	if o.ExperimentId != nil {
-		toSerialize["experiment_id"] = o.ExperimentId
+		toSerialize["experimentId"] = o.ExperimentId
 	}
 	if o.OtherAnalysisDescriptor != nil {
-		toSerialize["other_analysis_descriptor"] = o.OtherAnalysisDescriptor
+		toSerialize["otherAnalysisDescriptor"] = o.OtherAnalysisDescriptor
 	}
 	if o.OtherAnalysisCompletitionDate != nil {
-		toSerialize["other_analysis_completition_date"] = o.OtherAnalysisCompletitionDate
+		toSerialize["otherAnalysisCompletitionDate"] = o.OtherAnalysisCompletitionDate
 	}
 	return json.Marshal(toSerialize)
 }
-
-

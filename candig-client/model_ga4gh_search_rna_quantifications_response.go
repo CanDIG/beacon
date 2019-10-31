@@ -8,18 +8,18 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// This is the response from 'POST /rnaquantifications/search' expressed as JSON.
+// Ga4ghSearchRnaQuantificationsResponse This is the response from 'POST /rnaquantifications/search' expressed as JSON.
 type Ga4ghSearchRnaQuantificationsResponse struct {
 	// The list of matching quantifications.
 	RnaQuantifications *[]Ga4ghRnaQuantification `json:"rna_quantifications,omitempty"`
 
 	// The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of 'nextPageToken' from the previous response.
 	NextPageToken *string `json:"next_page_token,omitempty"`
-
 }
 
 // GetRnaQuantifications returns the RnaQuantifications field if non-nil, zero value otherwise.
@@ -88,7 +88,7 @@ func (o *Ga4ghSearchRnaQuantificationsResponse) SetNextPageToken(v string) {
 	o.NextPageToken = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchRnaQuantificationsResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.RnaQuantifications != nil {
@@ -99,5 +99,3 @@ func (o Ga4ghSearchRnaQuantificationsResponse) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

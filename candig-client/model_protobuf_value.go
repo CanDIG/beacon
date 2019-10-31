@@ -8,27 +8,27 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// `Value` represents a dynamically typed value which can be either null, a number, a string, a boolean, a recursive struct value, or a list of values. A producer of value is expected to set one of that variants, absence of any variant indicates an error.  The JSON representation for `Value` is JSON value.
+// ProtobufValue `Value` represents a dynamically typed value which can be either null, a number, a string, a boolean, a recursive struct value, or a list of values. A producer of value is expected to set one of that variants, absence of any variant indicates an error.  The JSON representation for `Value` is JSON value.
 type ProtobufValue struct {
-	NullValue *GoogleprotobufNullValue `json:"null_value,omitempty"`
+	NullValue *GoogleprotobufNullValue `json:"nullValue,omitempty"`
 
 	// Represents a double value.
 	NumberValue *float64 `json:"number_value,omitempty"`
 
 	// Represents a string value.
-	StringValue *string `json:"string_value,omitempty"`
+	StringValue *string `json:"stringValue,omitempty"`
 
 	// Represents a boolean value.
-	BoolValue *bool `json:"bool_value,omitempty"`
+	BoolValue *bool `json:"boolValue,omitempty"`
 
 	StructValue *ProtobufStruct `json:"struct_value,omitempty"`
 
 	ListValue *ProtobufListValue `json:"list_value,omitempty"`
-
 }
 
 // GetNullValue returns the NullValue field if non-nil, zero value otherwise.
@@ -229,20 +229,20 @@ func (o *ProtobufValue) SetListValue(v ProtobufListValue) {
 	o.ListValue = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o ProtobufValue) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.NullValue != nil {
-		toSerialize["null_value"] = o.NullValue
+		toSerialize["nullValue"] = o.NullValue
 	}
 	if o.NumberValue != nil {
 		toSerialize["number_value"] = o.NumberValue
 	}
 	if o.StringValue != nil {
-		toSerialize["string_value"] = o.StringValue
+		toSerialize["stringValue"] = o.StringValue
 	}
 	if o.BoolValue != nil {
-		toSerialize["bool_value"] = o.BoolValue
+		toSerialize["boolValue"] = o.BoolValue
 	}
 	if o.StructValue != nil {
 		toSerialize["struct_value"] = o.StructValue
@@ -252,5 +252,3 @@ func (o ProtobufValue) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

@@ -8,17 +8,18 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// A set of sequence features annotations.
+// Ga4ghFeatureSet A set of sequence features annotations.
 type Ga4ghFeatureSet struct {
 	// The ID of this annotation set.
 	Id *string `json:"id,omitempty"`
 
 	// The ID of the dataset this annotation set belongs to.
-	DatasetId *string `json:"dataset_id,omitempty"`
+	DatasetId *string `json:"datasetId,omitempty"`
 
 	// The ID of the reference set which defines the coordinate-space for this set of annotations.
 	ReferenceSetId *string `json:"reference_set_id,omitempty"`
@@ -28,7 +29,6 @@ type Ga4ghFeatureSet struct {
 
 	// The source URI describing the file from which this annotation set was generated, if any.
 	SourceUri *string `json:"source_uri,omitempty"`
-
 }
 
 // GetId returns the Id field if non-nil, zero value otherwise.
@@ -196,14 +196,14 @@ func (o *Ga4ghFeatureSet) SetSourceUri(v string) {
 	o.SourceUri = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghFeatureSet) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
 	}
 	if o.DatasetId != nil {
-		toSerialize["dataset_id"] = o.DatasetId
+		toSerialize["datasetId"] = o.DatasetId
 	}
 	if o.ReferenceSetId != nil {
 		toSerialize["reference_set_id"] = o.ReferenceSetId
@@ -216,5 +216,3 @@ func (o Ga4ghFeatureSet) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

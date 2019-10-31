@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// A VariantSet is a collection of variants and variant calls intended to be analyzed together.
+// Ga4ghVariantSet A VariantSet is a collection of variants and variant calls intended to be analyzed together.
 type Ga4ghVariantSet struct {
 	// The variant set ID.
 	Id *string `json:"id,omitempty"`
@@ -21,7 +22,7 @@ type Ga4ghVariantSet struct {
 	Name *string `json:"name,omitempty"`
 
 	// The ID of the dataset this variant set belongs to.
-	DatasetId *string `json:"dataset_id,omitempty"`
+	DatasetId *string `json:"datasetId,omitempty"`
 
 	// The ID of the reference set that describes the sequences used by the variants in this set.
 	ReferenceSetId *string `json:"reference_set_id,omitempty"`
@@ -32,7 +33,6 @@ type Ga4ghVariantSet struct {
 
 	// Optional metadata associated with this variant set. This array can be used to store information about the variant set, such as information found in VCF header fields, that isn't already available in first class fields such as \"name\".
 	Metadata *[]Ga4ghVariantSetMetadata `json:"metadata,omitempty"`
-
 }
 
 // GetId returns the Id field if non-nil, zero value otherwise.
@@ -266,7 +266,7 @@ func (o *Ga4ghVariantSet) SetMetadata(v []Ga4ghVariantSetMetadata) {
 	o.Metadata = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghVariantSet) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -276,7 +276,7 @@ func (o Ga4ghVariantSet) MarshalJSON() ([]byte, error) {
 		toSerialize["name"] = o.Name
 	}
 	if o.DatasetId != nil {
-		toSerialize["dataset_id"] = o.DatasetId
+		toSerialize["datasetId"] = o.DatasetId
 	}
 	if o.ReferenceSetId != nil {
 		toSerialize["reference_set_id"] = o.ReferenceSetId
@@ -292,5 +292,3 @@ func (o Ga4ghVariantSet) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

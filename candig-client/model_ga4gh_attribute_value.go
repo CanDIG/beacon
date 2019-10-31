@@ -8,25 +8,26 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// Type defining a collection of attributes associated with various protocol records. Each attribute is a name that maps to an array of one or more values. Values are chosen from both internal protobuf types and GA4GH.  Values should be split into array elements instead of using a separator syntax that needs to parsed.
+// Ga4ghAttributeValue Type defining a collection of attributes associated with various protocol records. Each attribute is a name that maps to an array of one or more values. Values are chosen from both internal protobuf types and GA4GH.  Values should be split into array elements instead of using a separator syntax that needs to parsed.
 type Ga4ghAttributeValue struct {
-	StringValue *string `json:"string_value,omitempty"`
+	StringValue *string `json:"stringValue,omitempty"`
 
-	Int64Value *string `json:"int64_value,omitempty"`
+	Int64Value *string `json:"int64Value,omitempty"`
 
-	Int32Value *int32 `json:"int32_value,omitempty"`
+	Int32Value *int32 `json:"int32Value,omitempty"`
 
-	BoolValue *bool `json:"bool_value,omitempty"`
+	BoolValue *bool `json:"boolValue,omitempty"`
 
-	DoubleValue *float64 `json:"double_value,omitempty"`
+	DoubleValue *float64 `json:"doubleValue,omitempty"`
 
-	ExternalIdentifier *Ga4ghExternalIdentifier `json:"external_identifier,omitempty"`
+	ExternalIdentifier *Ga4ghExternalIdentifier `json:"externalIdentifier,omitempty"`
 
-	OntologyTerm *Ga4ghOntologyTerm `json:"ontology_term,omitempty"`
+	OntologyTerm *Ga4ghOntologyTerm `json:"ontologyTerm,omitempty"`
 
 	Experiment *Ga4ghExperiment `json:"experiment,omitempty"`
 
@@ -34,10 +35,9 @@ type Ga4ghAttributeValue struct {
 
 	Analysis *Ga4ghAnalysis `json:"analysis,omitempty"`
 
-	NullValue *Ga4ghNullValue `json:"null_value,omitempty"`
+	NullValue *Ga4ghNullValue `json:"nullValue,omitempty"`
 
-	AttributeList *Ga4ghAttributeValueList `json:"attribute_list,omitempty"`
-
+	AttributeList *Ga4ghAttributeValueList `json:"attributeList,omitempty"`
 }
 
 // GetStringValue returns the StringValue field if non-nil, zero value otherwise.
@@ -436,29 +436,29 @@ func (o *Ga4ghAttributeValue) SetAttributeList(v Ga4ghAttributeValueList) {
 	o.AttributeList = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghAttributeValue) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.StringValue != nil {
-		toSerialize["string_value"] = o.StringValue
+		toSerialize["stringValue"] = o.StringValue
 	}
 	if o.Int64Value != nil {
-		toSerialize["int64_value"] = o.Int64Value
+		toSerialize["int64Value"] = o.Int64Value
 	}
 	if o.Int32Value != nil {
-		toSerialize["int32_value"] = o.Int32Value
+		toSerialize["int32Value"] = o.Int32Value
 	}
 	if o.BoolValue != nil {
-		toSerialize["bool_value"] = o.BoolValue
+		toSerialize["boolValue"] = o.BoolValue
 	}
 	if o.DoubleValue != nil {
-		toSerialize["double_value"] = o.DoubleValue
+		toSerialize["doubleValue"] = o.DoubleValue
 	}
 	if o.ExternalIdentifier != nil {
-		toSerialize["external_identifier"] = o.ExternalIdentifier
+		toSerialize["externalIdentifier"] = o.ExternalIdentifier
 	}
 	if o.OntologyTerm != nil {
-		toSerialize["ontology_term"] = o.OntologyTerm
+		toSerialize["ontologyTerm"] = o.OntologyTerm
 	}
 	if o.Experiment != nil {
 		toSerialize["experiment"] = o.Experiment
@@ -470,12 +470,10 @@ func (o Ga4ghAttributeValue) MarshalJSON() ([]byte, error) {
 		toSerialize["analysis"] = o.Analysis
 	}
 	if o.NullValue != nil {
-		toSerialize["null_value"] = o.NullValue
+		toSerialize["nullValue"] = o.NullValue
 	}
 	if o.AttributeList != nil {
-		toSerialize["attribute_list"] = o.AttributeList
+		toSerialize["attributeList"] = o.AttributeList
 	}
 	return json.Marshal(toSerialize)
 }
-
-

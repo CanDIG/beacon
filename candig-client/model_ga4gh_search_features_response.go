@@ -8,18 +8,18 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// This is the response from `POST /features/search` expressed as JSON.
+// Ga4ghSearchFeaturesResponse This is the response from `POST /features/search` expressed as JSON.
 type Ga4ghSearchFeaturesResponse struct {
 	// The list of matching annotations, sorted by start position. Annotations which share a start position are returned in a deterministic order.
 	Features *[]Ga4ghFeature `json:"features,omitempty"`
 
 	// The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results.
 	NextPageToken *string `json:"next_page_token,omitempty"`
-
 }
 
 // GetFeatures returns the Features field if non-nil, zero value otherwise.
@@ -88,7 +88,7 @@ func (o *Ga4ghSearchFeaturesResponse) SetNextPageToken(v string) {
 	o.NextPageToken = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchFeaturesResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Features != nil {
@@ -99,5 +99,3 @@ func (o Ga4ghSearchFeaturesResponse) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

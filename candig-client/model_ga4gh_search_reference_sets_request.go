@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// ****************  /referencesets  ******************* This request maps to the body of `POST /referencesets/search` as JSON.
+// Ga4ghSearchReferenceSetsRequest ****************  /referencesets  ******************* This request maps to the body of `POST /referencesets/search` as JSON.
 type Ga4ghSearchReferenceSetsRequest struct {
 	// If unset, return the reference sets for which the `md5checksum` matches this string (case-sensitive, exact match). See `ReferenceSet::md5checksum` for details.
 	Md5checksum *string `json:"md5checksum,omitempty"`
@@ -28,7 +29,6 @@ type Ga4ghSearchReferenceSetsRequest struct {
 
 	// The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of `next_page_token` from the previous response.
 	PageToken *string `json:"page_token,omitempty"`
-
 }
 
 // GetMd5checksum returns the Md5checksum field if non-nil, zero value otherwise.
@@ -196,7 +196,7 @@ func (o *Ga4ghSearchReferenceSetsRequest) SetPageToken(v string) {
 	o.PageToken = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchReferenceSetsRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Md5checksum != nil {
@@ -216,5 +216,3 @@ func (o Ga4ghSearchReferenceSetsRequest) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

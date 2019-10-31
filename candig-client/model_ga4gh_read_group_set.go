@@ -8,17 +8,18 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// A ReadGroupSet is a logical collection of ReadGroups. Typically one ReadGroupSet represents all the reads from one experimental sample.
+// Ga4ghReadGroupSet A ReadGroupSet is a logical collection of ReadGroups. Typically one ReadGroupSet represents all the reads from one experimental sample.
 type Ga4ghReadGroupSet struct {
 	// The read group set ID.
 	Id *string `json:"id,omitempty"`
 
 	// The ID of the dataset this read group set belongs to.
-	DatasetId *string `json:"dataset_id,omitempty"`
+	DatasetId *string `json:"datasetId,omitempty"`
 
 	// The read group set name.
 	Name *string `json:"name,omitempty"`
@@ -31,7 +32,6 @@ type Ga4ghReadGroupSet struct {
 	PatientId *string `json:"patient_id,omitempty"`
 
 	SampleId *string `json:"sample_id,omitempty"`
-
 }
 
 // GetId returns the Id field if non-nil, zero value otherwise.
@@ -265,14 +265,14 @@ func (o *Ga4ghReadGroupSet) SetSampleId(v string) {
 	o.SampleId = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghReadGroupSet) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
 	}
 	if o.DatasetId != nil {
-		toSerialize["dataset_id"] = o.DatasetId
+		toSerialize["datasetId"] = o.DatasetId
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
@@ -291,5 +291,3 @@ func (o Ga4ghReadGroupSet) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

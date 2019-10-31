@@ -8,14 +8,15 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// SequencingThis request maps to the body of `POST /sequencing/search` as JSON.
+// Ga4ghSearchSequencingRequest SequencingThis request maps to the body of `POST /sequencing/search` as JSON.
 type Ga4ghSearchSequencingRequest struct {
 	// Optionally specify the dataset to search within.
-	DatasetId *string `json:"dataset_id,omitempty"`
+	DatasetId *string `json:"datasetId,omitempty"`
 
 	// Returns Sequencing with the given name found by case-sensitive string matching.
 	Name *string `json:"name,omitempty"`
@@ -29,7 +30,6 @@ type Ga4ghSearchSequencingRequest struct {
 	PageToken *string `json:"page_token,omitempty"`
 
 	Filters *[]Ga4ghFilter `json:"filters,omitempty"`
-
 }
 
 // GetDatasetId returns the DatasetId field if non-nil, zero value otherwise.
@@ -230,11 +230,11 @@ func (o *Ga4ghSearchSequencingRequest) SetFilters(v []Ga4ghFilter) {
 	o.Filters = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchSequencingRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.DatasetId != nil {
-		toSerialize["dataset_id"] = o.DatasetId
+		toSerialize["datasetId"] = o.DatasetId
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
@@ -253,5 +253,3 @@ func (o Ga4ghSearchSequencingRequest) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

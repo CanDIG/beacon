@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// This request maps to the body of `POST /features/search` as JSON.
+// Ga4ghSearchFeaturesRequest This request maps to the body of `POST /features/search` as JSON.
 type Ga4ghSearchFeaturesRequest struct {
 	// The annotation set to search within. Either `feature_set_id` or `parent_id` must be non-empty.
 	FeatureSetId *string `json:"feature_set_id,omitempty"`
@@ -43,7 +44,6 @@ type Ga4ghSearchFeaturesRequest struct {
 
 	// The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of `next_page_token` from the previous response.
 	PageToken *string `json:"page_token,omitempty"`
-
 }
 
 // GetFeatureSetId returns the FeatureSetId field if non-nil, zero value otherwise.
@@ -376,7 +376,7 @@ func (o *Ga4ghSearchFeaturesRequest) SetPageToken(v string) {
 	o.PageToken = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchFeaturesRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.FeatureSetId != nil {
@@ -411,5 +411,3 @@ func (o Ga4ghSearchFeaturesRequest) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

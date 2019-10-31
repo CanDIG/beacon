@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// Node in the annotation graph that annotates a contiguous region of a sequence.
+// Ga4ghFeature Node in the annotation graph that annotates a contiguous region of a sequence.
 type Ga4ghFeature struct {
 	// Id of this annotation node.
 	Id *string `json:"id,omitempty"`
@@ -44,7 +45,6 @@ type Ga4ghFeature struct {
 	Strand *Ga4ghStrand `json:"strand,omitempty"`
 
 	FeatureType *Ga4ghOntologyTerm `json:"feature_type,omitempty"`
-
 }
 
 // GetId returns the Id field if non-nil, zero value otherwise.
@@ -410,7 +410,7 @@ func (o *Ga4ghFeature) SetFeatureType(v Ga4ghOntologyTerm) {
 	o.FeatureType = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghFeature) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -448,5 +448,3 @@ func (o Ga4ghFeature) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

@@ -8,10 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
+// Ga4ghFilter struct for Ga4ghFilter
 type Ga4ghFilter struct {
 	Field *string `json:"field,omitempty"`
 
@@ -20,7 +22,6 @@ type Ga4ghFilter struct {
 	Value *string `json:"value,omitempty"`
 
 	Values *[]string `json:"values,omitempty"`
-
 }
 
 // GetField returns the Field field if non-nil, zero value otherwise.
@@ -155,7 +156,7 @@ func (o *Ga4ghFilter) SetValues(v []string) {
 	o.Values = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghFilter) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Field != nil {
@@ -172,5 +173,3 @@ func (o Ga4ghFilter) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

@@ -8,18 +8,18 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// This is the response from `POST /diagnoses/search` expressed as JSON.
+// Ga4ghSearchDiagnosesResponse This is the response from `POST /diagnoses/search` expressed as JSON.
 type Ga4ghSearchDiagnosesResponse struct {
 	// The list of diagnoses.
 	Diagnoses *[]Ga4ghDiagnosis `json:"diagnoses,omitempty"`
 
 	// The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results.
 	NextPageToken *string `json:"next_page_token,omitempty"`
-
 }
 
 // GetDiagnoses returns the Diagnoses field if non-nil, zero value otherwise.
@@ -88,7 +88,7 @@ func (o *Ga4ghSearchDiagnosesResponse) SetNextPageToken(v string) {
 	o.NextPageToken = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchDiagnosesResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Diagnoses != nil {
@@ -99,5 +99,3 @@ func (o Ga4ghSearchDiagnosesResponse) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

@@ -11,13 +11,13 @@ services:
   beacon:
     build: .
     environment:
-      CANDIG_URL: http://candig-server/
+      BEACON_VERBOSE: ${BEACON_VERBOSE}
     depends_on:
       - candig-server
 
   haproxy:
-    build: proxy
+    image: haproxy
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
     ports:
       - 80/tcp
-    environment:
-      BACKEND: beacon:8080

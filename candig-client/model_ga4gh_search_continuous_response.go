@@ -8,18 +8,18 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// This is the response from `POST /continuous/search` expressed as JSON.
+// Ga4ghSearchContinuousResponse This is the response from `POST /continuous/search` expressed as JSON.
 type Ga4ghSearchContinuousResponse struct {
 	// The list of matching continuous values, sorted by start position. All sampled values within the query range are returned. Unsampled values are assigned 'NaN' value. The values returned do not necessarily cover the same range as the query as all unsampled values might not be returned or if the query range extends beyond the reference range.
 	Continuous *[]Ga4ghContinuous `json:"continuous,omitempty"`
 
 	// The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results.
 	NextPageToken *string `json:"next_page_token,omitempty"`
-
 }
 
 // GetContinuous returns the Continuous field if non-nil, zero value otherwise.
@@ -88,7 +88,7 @@ func (o *Ga4ghSearchContinuousResponse) SetNextPageToken(v string) {
 	o.NextPageToken = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchContinuousResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Continuous != nil {
@@ -99,5 +99,3 @@ func (o Ga4ghSearchContinuousResponse) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

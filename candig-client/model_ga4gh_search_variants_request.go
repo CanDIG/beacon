@@ -8,14 +8,15 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// ******************  /variants  ********************* This request maps to the body of `POST /variants/search` as JSON.
+// Ga4ghSearchVariantsRequest ******************  /variants  ********************* This request maps to the body of `POST /variants/search` as JSON.
 type Ga4ghSearchVariantsRequest struct {
 	// The `dataset` to search.
-	DatasetId *string `json:"dataset_id,omitempty"`
+	DatasetId *string `json:"datasetId,omitempty"`
 
 	// Only return variant calls which belong to call sets with these IDs. If unspecified, return all variants and no variant call objects.
 	CallSetIds *[]string `json:"call_set_ids,omitempty"`
@@ -36,7 +37,6 @@ type Ga4ghSearchVariantsRequest struct {
 	PageToken *string `json:"page_token,omitempty"`
 
 	VariantSetIds *[]string `json:"variant_set_ids,omitempty"`
-
 }
 
 // GetDatasetId returns the DatasetId field if non-nil, zero value otherwise.
@@ -303,11 +303,11 @@ func (o *Ga4ghSearchVariantsRequest) SetVariantSetIds(v []string) {
 	o.VariantSetIds = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchVariantsRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.DatasetId != nil {
-		toSerialize["dataset_id"] = o.DatasetId
+		toSerialize["datasetId"] = o.DatasetId
 	}
 	if o.CallSetIds != nil {
 		toSerialize["call_set_ids"] = o.CallSetIds
@@ -332,5 +332,3 @@ func (o Ga4ghSearchVariantsRequest) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

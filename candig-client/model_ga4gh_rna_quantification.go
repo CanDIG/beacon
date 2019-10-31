@@ -8,17 +8,19 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
+// Ga4ghRnaQuantification struct for Ga4ghRnaQuantification
 type Ga4ghRnaQuantification struct {
 	// The unique ID assigned to the results of running the described programs on the specified reads and assignment to the listed annotation.
 	Id *string `json:"id,omitempty"`
 
 	Name *string `json:"name,omitempty"`
 
-	BiosampleId *string `json:"biosample_id,omitempty"`
+	BiosampleId *string `json:"biosampleId,omitempty"`
 
 	Description *string `json:"description,omitempty"`
 
@@ -37,7 +39,6 @@ type Ga4ghRnaQuantification struct {
 	SampleId *string `json:"sampleId,omitempty"`
 
 	PatientId *string `json:"patientId,omitempty"`
-
 }
 
 // GetId returns the Id field if non-nil, zero value otherwise.
@@ -370,7 +371,7 @@ func (o *Ga4ghRnaQuantification) SetPatientId(v string) {
 	o.PatientId = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghRnaQuantification) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -380,7 +381,7 @@ func (o Ga4ghRnaQuantification) MarshalJSON() ([]byte, error) {
 		toSerialize["name"] = o.Name
 	}
 	if o.BiosampleId != nil {
-		toSerialize["biosample_id"] = o.BiosampleId
+		toSerialize["biosampleId"] = o.BiosampleId
 	}
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
@@ -405,5 +406,3 @@ func (o Ga4ghRnaQuantification) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

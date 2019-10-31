@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// This request retrieves a region of a reference genome when sent to  the `/listreferencebases` endpoint.
+// Ga4ghListReferenceBasesRequest This request retrieves a region of a reference genome when sent to  the `/listreferencebases` endpoint.
 type Ga4ghListReferenceBasesRequest struct {
 	// The ID of the `Reference` to be retrieved.
 	ReferenceId *string `json:"reference_id,omitempty"`
@@ -25,7 +26,6 @@ type Ga4ghListReferenceBasesRequest struct {
 
 	// The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of `next_page_token` from the previous response.
 	PageToken *string `json:"page_token,omitempty"`
-
 }
 
 // GetReferenceId returns the ReferenceId field if non-nil, zero value otherwise.
@@ -160,7 +160,7 @@ func (o *Ga4ghListReferenceBasesRequest) SetPageToken(v string) {
 	o.PageToken = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghListReferenceBasesRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ReferenceId != nil {
@@ -177,5 +177,3 @@ func (o Ga4ghListReferenceBasesRequest) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

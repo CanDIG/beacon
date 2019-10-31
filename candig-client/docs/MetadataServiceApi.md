@@ -4,7 +4,7 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetDataset**](MetadataServiceApi.md#GetDataset) | **Get** /datasets/{dataset_id} | Gets a &#x60;Dataset&#x60; by ID.
+[**GetDataset**](MetadataServiceApi.md#GetDataset) | **Get** /datasets/{datasetId} | Gets a &#x60;Dataset&#x60; by ID.
 [**SearchDatasets**](MetadataServiceApi.md#SearchDatasets) | **Post** /datasets/search | Gets a list of &#x60;Dataset&#x60; matching the search criteria.
 
 
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 > Ga4ghDataset GetDataset(ctx, datasetId)
 Gets a `Dataset` by ID.
 
-`GET /datasets/{dataset_id}` will return a JSON version of `Dataset`.
+`GET /datasets/{datasetId}` will return a JSON version of `Dataset`.
 
 ### Required Parameters
 

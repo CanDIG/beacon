@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// A Program describes software used in data processing or analysis.
+// Ga4ghProgram A Program describes software used in data processing or analysis.
 type Ga4ghProgram struct {
 	// The command line used to run this program.
 	CommandLine *string `json:"command_line,omitempty"`
@@ -28,7 +29,6 @@ type Ga4ghProgram struct {
 
 	// The version of the program run.
 	Version *string `json:"version,omitempty"`
-
 }
 
 // GetCommandLine returns the CommandLine field if non-nil, zero value otherwise.
@@ -196,7 +196,7 @@ func (o *Ga4ghProgram) SetVersion(v string) {
 	o.Version = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghProgram) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.CommandLine != nil {
@@ -216,5 +216,3 @@ func (o Ga4ghProgram) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

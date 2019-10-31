@@ -8,10 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
+// Ga4ghComponent struct for Ga4ghComponent
 type Ga4ghComponent struct {
 	Id *string `json:"id,omitempty"`
 
@@ -52,7 +54,6 @@ type Ga4ghComponent struct {
 	Surgeries *Ga4ghSearchSurgeriesRequest `json:"surgeries,omitempty"`
 
 	Celltransplants *Ga4ghSearchCelltransplantsRequest `json:"celltransplants,omitempty"`
-
 }
 
 // GetId returns the Id field if non-nil, zero value otherwise.
@@ -715,7 +716,7 @@ func (o *Ga4ghComponent) SetCelltransplants(v Ga4ghSearchCelltransplantsRequest)
 	o.Celltransplants = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghComponent) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -780,5 +781,3 @@ func (o Ga4ghComponent) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

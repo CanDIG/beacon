@@ -8,17 +8,18 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// A ReadGroup is a set of reads derived from one physical sequencing process.
+// Ga4ghReadGroup A ReadGroup is a set of reads derived from one physical sequencing process.
 type Ga4ghReadGroup struct {
 	// The read group ID.
 	Id *string `json:"id,omitempty"`
 
 	// The ID of the dataset this read group belongs to.
-	DatasetId *string `json:"dataset_id,omitempty"`
+	DatasetId *string `json:"datasetId,omitempty"`
 
 	// The read group name.
 	Name *string `json:"name,omitempty"`
@@ -30,7 +31,7 @@ type Ga4ghReadGroup struct {
 	SampleName *string `json:"sample_name,omitempty"`
 
 	// The Biosample this read group's data was generated from.
-	BiosampleId *string `json:"biosample_id,omitempty"`
+	BiosampleId *string `json:"biosampleId,omitempty"`
 
 	Experiment *Ga4ghExperiment `json:"experiment,omitempty"`
 
@@ -50,7 +51,6 @@ type Ga4ghReadGroup struct {
 
 	// The ID of the reference set to which the reads in this read group are aligned. Required if there are any read alignments.
 	ReferenceSetId *string `json:"reference_set_id,omitempty"`
-
 }
 
 // GetId returns the Id field if non-nil, zero value otherwise.
@@ -482,14 +482,14 @@ func (o *Ga4ghReadGroup) SetReferenceSetId(v string) {
 	o.ReferenceSetId = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghReadGroup) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
 	}
 	if o.DatasetId != nil {
-		toSerialize["dataset_id"] = o.DatasetId
+		toSerialize["datasetId"] = o.DatasetId
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
@@ -501,7 +501,7 @@ func (o Ga4ghReadGroup) MarshalJSON() ([]byte, error) {
 		toSerialize["sample_name"] = o.SampleName
 	}
 	if o.BiosampleId != nil {
-		toSerialize["biosample_id"] = o.BiosampleId
+		toSerialize["biosampleId"] = o.BiosampleId
 	}
 	if o.Experiment != nil {
 		toSerialize["experiment"] = o.Experiment
@@ -526,5 +526,3 @@ func (o Ga4ghReadGroup) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

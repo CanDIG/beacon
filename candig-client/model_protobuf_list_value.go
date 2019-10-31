@@ -8,15 +8,15 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// `ListValue` is a wrapper around a repeated field of values.  The JSON representation for `ListValue` is JSON array.
+// ProtobufListValue `ListValue` is a wrapper around a repeated field of values.  The JSON representation for `ListValue` is JSON array.
 type ProtobufListValue struct {
 	// Repeated field of dynamically typed values.
 	Values *[]ProtobufValue `json:"values,omitempty"`
-
 }
 
 // GetValues returns the Values field if non-nil, zero value otherwise.
@@ -52,7 +52,7 @@ func (o *ProtobufListValue) SetValues(v []ProtobufValue) {
 	o.Values = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o ProtobufListValue) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Values != nil {
@@ -60,5 +60,3 @@ func (o ProtobufListValue) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

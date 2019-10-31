@@ -8,13 +8,14 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
+// Ga4ghAttributes struct for Ga4ghAttributes
 type Ga4ghAttributes struct {
 	Attr *map[string]Ga4ghAttributeValueList `json:"attr,omitempty"`
-
 }
 
 // GetAttr returns the Attr field if non-nil, zero value otherwise.
@@ -50,7 +51,7 @@ func (o *Ga4ghAttributes) SetAttr(v map[string]Ga4ghAttributeValueList) {
 	o.Attr = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghAttributes) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Attr != nil {
@@ -58,5 +59,3 @@ func (o Ga4ghAttributes) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

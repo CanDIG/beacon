@@ -8,18 +8,18 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// This is the response from `POST /variantsbygenename` expressed as JSON.
+// Ga4ghSearchVariantsByGeneNameResponse This is the response from `POST /variantsbygenename` expressed as JSON.
 type Ga4ghSearchVariantsByGeneNameResponse struct {
 	// The list of matching variants. If the `callSetId` field on the returned calls is not present, the ordering of the call sets from a `SearchCallSetsRequest` over the parent `VariantSet` is guaranteed to match the ordering of the calls on each `Variant`. The number of results will also be the same.
 	Variants *[]Ga4ghVariant `json:"variants,omitempty"`
 
 	// The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results.
 	NextPageToken *string `json:"next_page_token,omitempty"`
-
 }
 
 // GetVariants returns the Variants field if non-nil, zero value otherwise.
@@ -88,7 +88,7 @@ func (o *Ga4ghSearchVariantsByGeneNameResponse) SetNextPageToken(v string) {
 	o.NextPageToken = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchVariantsByGeneNameResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Variants != nil {
@@ -99,5 +99,3 @@ func (o Ga4ghSearchVariantsByGeneNameResponse) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

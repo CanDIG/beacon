@@ -8,7 +8,8 @@
  */
 
 package client
-// Ga4ghStrand : Indicates the associated DNA strand for some data item.   - STRAND_UNSPECIFIED: If no strand data is available.  - NEG_STRAND: The negative (-) strand.  - POS_STRAND: The postive (+) strand.
+
+// Ga4ghStrand Indicates the associated DNA strand for some data item.   - STRAND_UNSPECIFIED: If no strand data is available.  - NEG_STRAND: The negative (-) strand.  - POS_STRAND: The postive (+) strand.
 type Ga4ghStrand string
 
 // List of ga4ghStrand
@@ -17,4 +18,3 @@ const (
 	NEG_STRAND Ga4ghStrand = "NEG_STRAND"
 	POS_STRAND Ga4ghStrand = "POS_STRAND"
 )
-

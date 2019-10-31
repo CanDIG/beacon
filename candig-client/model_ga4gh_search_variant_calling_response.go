@@ -8,18 +8,18 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// This is the response from `POST /variantcalling/search` expressed as JSON.
+// Ga4ghSearchVariantCallingResponse This is the response from `POST /variantcalling/search` expressed as JSON.
 type Ga4ghSearchVariantCallingResponse struct {
 	// The list of variant calling metadata.
 	Variantcalling *[]Ga4ghVariantCalling `json:"variantcalling,omitempty"`
 
 	// The continuation token, which is used to page through large result sets.Provide this value in a subsequent request to return the next page ofresults. This field will be empty if there aren't any additional results.
 	NextPageToken *string `json:"next_page_token,omitempty"`
-
 }
 
 // GetVariantcalling returns the Variantcalling field if non-nil, zero value otherwise.
@@ -88,7 +88,7 @@ func (o *Ga4ghSearchVariantCallingResponse) SetNextPageToken(v string) {
 	o.NextPageToken = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchVariantCallingResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Variantcalling != nil {
@@ -99,5 +99,3 @@ func (o Ga4ghSearchVariantCallingResponse) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

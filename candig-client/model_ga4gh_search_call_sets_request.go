@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// ******************  /callsets  ********************* This request maps to the body of `POST /callsets/search` as JSON.
+// Ga4ghSearchCallSetsRequest ******************  /callsets  ********************* This request maps to the body of `POST /callsets/search` as JSON.
 type Ga4ghSearchCallSetsRequest struct {
 	// The VariantSet to search.
 	VariantSetId *string `json:"variant_set_id,omitempty"`
@@ -21,14 +22,13 @@ type Ga4ghSearchCallSetsRequest struct {
 	Name *string `json:"name,omitempty"`
 
 	// Return only call sets generated from the provided Biosample ID.
-	BiosampleId *string `json:"biosample_id,omitempty"`
+	BiosampleId *string `json:"biosampleId,omitempty"`
 
 	// Specifies the maximum number of results to return in a single page. If unspecified, a system default will be used.
 	PageSize *int32 `json:"page_size,omitempty"`
 
 	// The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of `next_page_token` from the previous response.
 	PageToken *string `json:"page_token,omitempty"`
-
 }
 
 // GetVariantSetId returns the VariantSetId field if non-nil, zero value otherwise.
@@ -196,7 +196,7 @@ func (o *Ga4ghSearchCallSetsRequest) SetPageToken(v string) {
 	o.PageToken = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchCallSetsRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.VariantSetId != nil {
@@ -206,7 +206,7 @@ func (o Ga4ghSearchCallSetsRequest) MarshalJSON() ([]byte, error) {
 		toSerialize["name"] = o.Name
 	}
 	if o.BiosampleId != nil {
-		toSerialize["biosample_id"] = o.BiosampleId
+		toSerialize["biosampleId"] = o.BiosampleId
 	}
 	if o.PageSize != nil {
 		toSerialize["page_size"] = o.PageSize
@@ -216,5 +216,3 @@ func (o Ga4ghSearchCallSetsRequest) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

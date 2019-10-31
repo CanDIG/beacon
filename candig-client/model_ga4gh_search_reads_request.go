@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// ******************  /reads  ********************* This request maps to the body of `POST /reads/search` as JSON.  If a reference is specified, all queried `ReadGroup`s must be aligned to `ReferenceSet`s containing that same `Reference`. If no reference is specified, all `ReadGroup`s must be aligned to the same `ReferenceSet`.
+// Ga4ghSearchReadsRequest ******************  /reads  ********************* This request maps to the body of `POST /reads/search` as JSON.  If a reference is specified, all queried `ReadGroup`s must be aligned to `ReferenceSet`s containing that same `Reference`. If no reference is specified, all `ReadGroup`s must be aligned to the same `ReferenceSet`.
 type Ga4ghSearchReadsRequest struct {
 	// The ReadGroups to search. At least one id must be specified.
 	ReadGroupIds *[]string `json:"read_group_ids,omitempty"`
@@ -31,7 +32,6 @@ type Ga4ghSearchReadsRequest struct {
 
 	// The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of `next_page_token` from the previous response.
 	PageToken *string `json:"page_token,omitempty"`
-
 }
 
 // GetReadGroupIds returns the ReadGroupIds field if non-nil, zero value otherwise.
@@ -232,7 +232,7 @@ func (o *Ga4ghSearchReadsRequest) SetPageToken(v string) {
 	o.PageToken = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchReadsRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ReadGroupIds != nil {
@@ -255,5 +255,3 @@ func (o Ga4ghSearchReadsRequest) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

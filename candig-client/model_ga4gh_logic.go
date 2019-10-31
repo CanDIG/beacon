@@ -8,10 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
+// Ga4ghLogic struct for Ga4ghLogic
 type Ga4ghLogic struct {
 	And *[]Ga4ghLogic `json:"and,omitempty"`
 
@@ -20,7 +22,6 @@ type Ga4ghLogic struct {
 	Id *string `json:"id,omitempty"`
 
 	Negate *bool `json:"negate,omitempty"`
-
 }
 
 // GetAnd returns the And field if non-nil, zero value otherwise.
@@ -155,7 +156,7 @@ func (o *Ga4ghLogic) SetNegate(v bool) {
 	o.Negate = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghLogic) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.And != nil {
@@ -172,5 +173,3 @@ func (o Ga4ghLogic) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

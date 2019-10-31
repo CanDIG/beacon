@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// An experimental preparation of a sample.
+// Ga4ghExperiment An experimental preparation of a sample.
 type Ga4ghExperiment struct {
 	Id *string `json:"id,omitempty"`
 
@@ -22,11 +23,11 @@ type Ga4ghExperiment struct {
 	// A description of the experiment.
 	Description *string `json:"description,omitempty"`
 
-	MessageCreateTime *string `json:"message_create_time,omitempty"`
+	MessageCreateTime *string `json:"messageCreateTime,omitempty"`
 
-	MessageUpdateTime *string `json:"message_update_time,omitempty"`
+	MessageUpdateTime *string `json:"messageUpdateTime,omitempty"`
 
-	RunTime *string `json:"run_time,omitempty"`
+	RunTime *string `json:"runTime,omitempty"`
 
 	Molecule *string `json:"molecule,omitempty"`
 
@@ -38,34 +39,33 @@ type Ga4ghExperiment struct {
 	Library *string `json:"library,omitempty"`
 
 	// The configuration of sequenced reads. (e.g. Single or Paired).
-	LibraryLayout *string `json:"library_layout,omitempty"`
+	LibraryLayout *string `json:"libraryLayout,omitempty"`
 
 	// The instrument model used as part of this experiment. This maps to sequencing technology in BAM.
-	InstrumentModel *string `json:"instrument_model,omitempty"`
+	InstrumentModel *string `json:"instrumentModel,omitempty"`
 
-	InstrumentDataFile *string `json:"instrument_data_file,omitempty"`
+	InstrumentDataFile *string `json:"instrumentDataFile,omitempty"`
 
 	// The sequencing center used as part of this experiment.
-	SequencingCenter *string `json:"sequencing_center,omitempty"`
+	SequencingCenter *string `json:"sequencingCenter,omitempty"`
 
 	// The platform unit used as part of this experiment. This is a flowcell-barcode or slide unique identifier.
-	PlatformUnit *string `json:"platform_unit,omitempty"`
+	PlatformUnit *string `json:"platformUnit,omitempty"`
 
 	// ### ===================================================================== ### # PROFYLE MODIFICATION BEGIN ### ===================================================================== ### The ID of the dataset this Experiment belongs to.
-	DatasetId *string `json:"dataset_id,omitempty"`
+	DatasetId *string `json:"datasetId,omitempty"`
 
-	BiosampleId *string `json:"biosample_id,omitempty"`
+	BiosampleId *string `json:"biosampleId,omitempty"`
 
-	DnaLibraryConstructionMethod *string `json:"dna_library_construction_method,omitempty"`
+	DnaLibraryConstructionMethod *string `json:"dnaLibraryConstructionMethod,omitempty"`
 
-	WgsSequencingCompletionDate *string `json:"wgs_sequencing_completion_date,omitempty"`
+	WgsSequencingCompletionDate *string `json:"wgsSequencingCompletionDate,omitempty"`
 
-	RnaLibraryConstructionMethod *string `json:"rna_library_construction_method,omitempty"`
+	RnaLibraryConstructionMethod *string `json:"rnaLibraryConstructionMethod,omitempty"`
 
-	RnaSequencingCompletionDate *string `json:"rna_sequencing_completion_date,omitempty"`
+	RnaSequencingCompletionDate *string `json:"rnaSequencingCompletionDate,omitempty"`
 
-	PanelCompletionDate *string `json:"panel_completion_date,omitempty"`
-
+	PanelCompletionDate *string `json:"panelCompletionDate,omitempty"`
 }
 
 // GetId returns the Id field if non-nil, zero value otherwise.
@@ -794,7 +794,7 @@ func (o *Ga4ghExperiment) SetPanelCompletionDate(v string) {
 	o.PanelCompletionDate = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghExperiment) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -807,13 +807,13 @@ func (o Ga4ghExperiment) MarshalJSON() ([]byte, error) {
 		toSerialize["description"] = o.Description
 	}
 	if o.MessageCreateTime != nil {
-		toSerialize["message_create_time"] = o.MessageCreateTime
+		toSerialize["messageCreateTime"] = o.MessageCreateTime
 	}
 	if o.MessageUpdateTime != nil {
-		toSerialize["message_update_time"] = o.MessageUpdateTime
+		toSerialize["messageUpdateTime"] = o.MessageUpdateTime
 	}
 	if o.RunTime != nil {
-		toSerialize["run_time"] = o.RunTime
+		toSerialize["runTime"] = o.RunTime
 	}
 	if o.Molecule != nil {
 		toSerialize["molecule"] = o.Molecule
@@ -828,42 +828,40 @@ func (o Ga4ghExperiment) MarshalJSON() ([]byte, error) {
 		toSerialize["library"] = o.Library
 	}
 	if o.LibraryLayout != nil {
-		toSerialize["library_layout"] = o.LibraryLayout
+		toSerialize["libraryLayout"] = o.LibraryLayout
 	}
 	if o.InstrumentModel != nil {
-		toSerialize["instrument_model"] = o.InstrumentModel
+		toSerialize["instrumentModel"] = o.InstrumentModel
 	}
 	if o.InstrumentDataFile != nil {
-		toSerialize["instrument_data_file"] = o.InstrumentDataFile
+		toSerialize["instrumentDataFile"] = o.InstrumentDataFile
 	}
 	if o.SequencingCenter != nil {
-		toSerialize["sequencing_center"] = o.SequencingCenter
+		toSerialize["sequencingCenter"] = o.SequencingCenter
 	}
 	if o.PlatformUnit != nil {
-		toSerialize["platform_unit"] = o.PlatformUnit
+		toSerialize["platformUnit"] = o.PlatformUnit
 	}
 	if o.DatasetId != nil {
-		toSerialize["dataset_id"] = o.DatasetId
+		toSerialize["datasetId"] = o.DatasetId
 	}
 	if o.BiosampleId != nil {
-		toSerialize["biosample_id"] = o.BiosampleId
+		toSerialize["biosampleId"] = o.BiosampleId
 	}
 	if o.DnaLibraryConstructionMethod != nil {
-		toSerialize["dna_library_construction_method"] = o.DnaLibraryConstructionMethod
+		toSerialize["dnaLibraryConstructionMethod"] = o.DnaLibraryConstructionMethod
 	}
 	if o.WgsSequencingCompletionDate != nil {
-		toSerialize["wgs_sequencing_completion_date"] = o.WgsSequencingCompletionDate
+		toSerialize["wgsSequencingCompletionDate"] = o.WgsSequencingCompletionDate
 	}
 	if o.RnaLibraryConstructionMethod != nil {
-		toSerialize["rna_library_construction_method"] = o.RnaLibraryConstructionMethod
+		toSerialize["rnaLibraryConstructionMethod"] = o.RnaLibraryConstructionMethod
 	}
 	if o.RnaSequencingCompletionDate != nil {
-		toSerialize["rna_sequencing_completion_date"] = o.RnaSequencingCompletionDate
+		toSerialize["rnaSequencingCompletionDate"] = o.RnaSequencingCompletionDate
 	}
 	if o.PanelCompletionDate != nil {
-		toSerialize["panel_completion_date"] = o.PanelCompletionDate
+		toSerialize["panelCompletionDate"] = o.PanelCompletionDate
 	}
 	return json.Marshal(toSerialize)
 }
-
-

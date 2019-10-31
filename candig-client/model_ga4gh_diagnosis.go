@@ -8,16 +8,18 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
+// Ga4ghDiagnosis struct for Ga4ghDiagnosis
 type Ga4ghDiagnosis struct {
 	// This is unique in the context of the server instance.
 	Id *string `json:"id,omitempty"`
 
 	// The ID of the dataset this object belongs to.
-	DatasetId *string `json:"dataset_id,omitempty"`
+	DatasetId *string `json:"datasetId,omitempty"`
 
 	// This is a label or symbolic identifier for this object.
 	Name *string `json:"name,omitempty"`
@@ -88,7 +90,6 @@ type Ga4ghDiagnosis struct {
 	AdditionalMolecularDiagnosticTestingPerformed *string `json:"additionalMolecularDiagnosticTestingPerformed,omitempty"`
 
 	AdditionalTest *string `json:"additionalTest,omitempty"`
-
 }
 
 // GetId returns the Id field if non-nil, zero value otherwise.
@@ -1246,14 +1247,14 @@ func (o *Ga4ghDiagnosis) SetAdditionalTest(v string) {
 	o.AdditionalTest = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghDiagnosis) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
 	}
 	if o.DatasetId != nil {
-		toSerialize["dataset_id"] = o.DatasetId
+		toSerialize["datasetId"] = o.DatasetId
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
@@ -1356,5 +1357,3 @@ func (o Ga4ghDiagnosis) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

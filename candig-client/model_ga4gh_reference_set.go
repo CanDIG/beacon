@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// A `ReferenceSet` is a set of `Reference` s which typically comprise a reference assembly, such as `GRCh38`. A `ReferenceSet` defines a common coordinate space for comparing reference-aligned experimental data.
+// Ga4ghReferenceSet A `ReferenceSet` is a set of `Reference` s which typically comprise a reference assembly, such as `GRCh38`. A `ReferenceSet` defines a common coordinate space for comparing reference-aligned experimental data.
 type Ga4ghReferenceSet struct {
 	// The reference set ID. Unique in the repository.
 	Id *string `json:"id,omitempty"`
@@ -39,7 +40,6 @@ type Ga4ghReferenceSet struct {
 
 	// A reference set may be derived from a source if it contains additional sequences, or some of the sequences within it are derived (see the definition of `isDerived` in `Reference`).
 	IsDerived *bool `json:"is_derived,omitempty"`
-
 }
 
 // GetId returns the Id field if non-nil, zero value otherwise.
@@ -339,7 +339,7 @@ func (o *Ga4ghReferenceSet) SetIsDerived(v bool) {
 	o.IsDerived = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghReferenceSet) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -371,5 +371,3 @@ func (o Ga4ghReferenceSet) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

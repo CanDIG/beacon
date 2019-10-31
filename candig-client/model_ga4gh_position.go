@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// A `Position` is an unoriented base in some `Reference`. A `Position` is represented by a `Reference` name, and a base number on that `Reference` (0-based).
+// Ga4ghPosition A `Position` is an unoriented base in some `Reference`. A `Position` is represented by a `Reference` name, and a base number on that `Reference` (0-based).
 type Ga4ghPosition struct {
 	// The name of the `Reference` on which the `Position` is located.
 	ReferenceName *string `json:"reference_name,omitempty"`
@@ -21,7 +22,6 @@ type Ga4ghPosition struct {
 	Position *string `json:"position,omitempty"`
 
 	Strand *Ga4ghStrand `json:"strand,omitempty"`
-
 }
 
 // GetReferenceName returns the ReferenceName field if non-nil, zero value otherwise.
@@ -123,7 +123,7 @@ func (o *Ga4ghPosition) SetStrand(v Ga4ghStrand) {
 	o.Strand = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghPosition) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ReferenceName != nil {
@@ -137,5 +137,3 @@ func (o Ga4ghPosition) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

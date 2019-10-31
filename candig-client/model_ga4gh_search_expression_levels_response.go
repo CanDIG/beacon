@@ -8,18 +8,18 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// This is the response from 'POST /expressionlevels/search' expressed as JSON.
+// Ga4ghSearchExpressionLevelsResponse This is the response from 'POST /expressionlevels/search' expressed as JSON.
 type Ga4ghSearchExpressionLevelsResponse struct {
 	// The list of matching quantifications.
 	ExpressionLevels *[]Ga4ghExpressionLevel `json:"expression_levels,omitempty"`
 
 	// The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of 'nextPageToken' from the previous response.
 	NextPageToken *string `json:"next_page_token,omitempty"`
-
 }
 
 // GetExpressionLevels returns the ExpressionLevels field if non-nil, zero value otherwise.
@@ -88,7 +88,7 @@ func (o *Ga4ghSearchExpressionLevelsResponse) SetNextPageToken(v string) {
 	o.NextPageToken = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghSearchExpressionLevelsResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ExpressionLevels != nil {
@@ -99,5 +99,3 @@ func (o Ga4ghSearchExpressionLevelsResponse) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

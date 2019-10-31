@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// This metadata represents VCF header information.
+// Ga4ghVariantSetMetadata This metadata represents VCF header information.
 type Ga4ghVariantSetMetadata struct {
 	// The top-level key.
 	Key *string `json:"key,omitempty"`
@@ -32,7 +33,6 @@ type Ga4ghVariantSetMetadata struct {
 	Description *string `json:"description,omitempty"`
 
 	Attributes *Ga4ghAttributes `json:"attributes,omitempty"`
-
 }
 
 // GetKey returns the Key field if non-nil, zero value otherwise.
@@ -266,7 +266,7 @@ func (o *Ga4ghVariantSetMetadata) SetAttributes(v Ga4ghAttributes) {
 	o.Attributes = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghVariantSetMetadata) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Key != nil {
@@ -292,5 +292,3 @@ func (o Ga4ghVariantSetMetadata) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

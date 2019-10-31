@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// This message defines a format for exchanging continuous valued signal data, such as those produced experimentally (e.g. ChIP-Seq data) or through  calculations (e.g. conservation scores). It can be used, for example, to share data from Wiggle, BigWig, and BedGraph sources.
+// Ga4ghContinuous This message defines a format for exchanging continuous valued signal data, such as those produced experimentally (e.g. ChIP-Seq data) or through  calculations (e.g. conservation scores). It can be used, for example, to share data from Wiggle, BigWig, and BedGraph sources.
 type Ga4ghContinuous struct {
 	// The start position at which this signal occurs (0-based). This corresponds to the first base of the string of reference bases. Genomic positions are non-negative integers less than the reference length.
 	Start *string `json:"start,omitempty"`
@@ -25,7 +26,6 @@ type Ga4ghContinuous struct {
 
 	// The reference on which this signal is defined (e.g. `chr20` or `X`).
 	ReferenceName *string `json:"reference_name,omitempty"`
-
 }
 
 // GetStart returns the Start field if non-nil, zero value otherwise.
@@ -160,7 +160,7 @@ func (o *Ga4ghContinuous) SetReferenceName(v string) {
 	o.ReferenceName = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghContinuous) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Start != nil {
@@ -177,5 +177,3 @@ func (o Ga4ghContinuous) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// The response from `POST /listreferencebases` expressed as JSON.
+// Ga4ghListReferenceBasesResponse The response from `POST /listreferencebases` expressed as JSON.
 type Ga4ghListReferenceBasesResponse struct {
 	// The offset position (0-based) of the given sequence from the start of this `Reference`. This value will differ for each page in a paginated request.
 	Offset *string `json:"offset,omitempty"`
@@ -22,7 +23,6 @@ type Ga4ghListReferenceBasesResponse struct {
 
 	// The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results.
 	NextPageToken *string `json:"next_page_token,omitempty"`
-
 }
 
 // GetOffset returns the Offset field if non-nil, zero value otherwise.
@@ -124,7 +124,7 @@ func (o *Ga4ghListReferenceBasesResponse) SetNextPageToken(v string) {
 	o.NextPageToken = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghListReferenceBasesResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Offset != nil {
@@ -138,5 +138,3 @@ func (o Ga4ghListReferenceBasesResponse) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

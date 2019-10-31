@@ -9,7 +9,7 @@
 
 package client
 
-// Ga4ghNullValue :  - NULL_VALUE: Null value.
+// Ga4ghNullValue  - NULL_VALUE: Null value.
 type Ga4ghNullValue string
 
 // List of ga4ghNullValue

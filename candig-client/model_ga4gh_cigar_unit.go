@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// A single CIGAR operation.
+// Ga4ghCigarUnit A single CIGAR operation.
 type Ga4ghCigarUnit struct {
 	Operation *CigarUnitOperation `json:"operation,omitempty"`
 
@@ -21,7 +22,6 @@ type Ga4ghCigarUnit struct {
 
 	// `referenceSequence` is only used at mismatches (`SEQUENCE_MISMATCH`) and deletions (`DELETE`). Filling this field replaces SAM's MD tag. If the relevant information is not available, this field is unset.
 	ReferenceSequence *string `json:"reference_sequence,omitempty"`
-
 }
 
 // GetOperation returns the Operation field if non-nil, zero value otherwise.
@@ -123,7 +123,7 @@ func (o *Ga4ghCigarUnit) SetReferenceSequence(v string) {
 	o.ReferenceSequence = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghCigarUnit) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Operation != nil {
@@ -137,5 +137,3 @@ func (o Ga4ghCigarUnit) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

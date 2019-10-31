@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// The actual numerical quantification for each feature.
+// Ga4ghExpressionLevel The actual numerical quantification for each feature.
 type Ga4ghExpressionLevel struct {
 	Id *string `json:"id,omitempty"`
 
@@ -39,7 +40,6 @@ type Ga4ghExpressionLevel struct {
 
 	// Upper bound of the confidence interval on the expression value.
 	ConfIntervalHigh *float32 `json:"conf_interval_high,omitempty"`
-
 }
 
 // GetId returns the Id field if non-nil, zero value otherwise.
@@ -372,7 +372,7 @@ func (o *Ga4ghExpressionLevel) SetConfIntervalHigh(v float32) {
 	o.ConfIntervalHigh = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghExpressionLevel) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -407,5 +407,3 @@ func (o Ga4ghExpressionLevel) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

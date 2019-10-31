@@ -9,3 +9,5 @@ ENV GIN_MODE=release
 COPY --from=build /src/beacon /
 EXPOSE 8080/tcp
 ENTRYPOINT ["/beacon"]
+env BEACON_VERBOSE=
+ENV CANDIG_URL=http://candig-server

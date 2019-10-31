@@ -8,16 +8,18 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
+// Ga4ghComplication struct for Ga4ghComplication
 type Ga4ghComplication struct {
 	// This is unique in the context of the server instance.
 	Id *string `json:"id,omitempty"`
 
 	// The ID of the dataset this object belongs to.
-	DatasetId *string `json:"dataset_id,omitempty"`
+	DatasetId *string `json:"datasetId,omitempty"`
 
 	// This is a label or symbolic identifier for this object.
 	Name *string `json:"name,omitempty"`
@@ -42,7 +44,6 @@ type Ga4ghComplication struct {
 	SuspectedTreatmentInducedNeoplasmDeveloped *string `json:"suspectedTreatmentInducedNeoplasmDeveloped,omitempty"`
 
 	TreatmentInducedNeoplasmDetails *string `json:"treatmentInducedNeoplasmDetails,omitempty"`
-
 }
 
 // GetId returns the Id field if non-nil, zero value otherwise.
@@ -441,14 +442,14 @@ func (o *Ga4ghComplication) SetTreatmentInducedNeoplasmDetails(v string) {
 	o.TreatmentInducedNeoplasmDetails = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghComplication) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
 	}
 	if o.DatasetId != nil {
-		toSerialize["dataset_id"] = o.DatasetId
+		toSerialize["datasetId"] = o.DatasetId
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
@@ -482,5 +483,3 @@ func (o Ga4ghComplication) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-

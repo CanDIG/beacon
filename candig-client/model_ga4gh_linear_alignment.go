@@ -8,11 +8,12 @@
  */
 
 package client
+
 import (
 	"encoding/json"
 )
 
-// A linear alignment describes the alignment of a read to a Reference, using a position and CIGAR array.
+// Ga4ghLinearAlignment A linear alignment describes the alignment of a read to a Reference, using a position and CIGAR array.
 type Ga4ghLinearAlignment struct {
 	Position *Ga4ghPosition `json:"position,omitempty"`
 
@@ -21,7 +22,6 @@ type Ga4ghLinearAlignment struct {
 
 	// Represents the local alignment of this sequence (alignment matches, indels, etc) versus the reference.
 	Cigar *[]Ga4ghCigarUnit `json:"cigar,omitempty"`
-
 }
 
 // GetPosition returns the Position field if non-nil, zero value otherwise.
@@ -123,7 +123,7 @@ func (o *Ga4ghLinearAlignment) SetCigar(v []Ga4ghCigarUnit) {
 	o.Cigar = &v
 }
 
-
+// MarshalJSON returns the JSON representation of the model.
 func (o Ga4ghLinearAlignment) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Position != nil {
@@ -137,5 +137,3 @@ func (o Ga4ghLinearAlignment) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(toSerialize)
 }
-
-
