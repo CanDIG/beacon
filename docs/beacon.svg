@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="481" height="101" viewBox="-0.5 -0.5 481 101">
+    <path d="M80 80h193.63" fill="none" stroke="#000" stroke-miterlimit="10" pointer-events="none"/>
+    <path d="M278.88 80l-7 3.5 1.75-3.5-1.75-3.5z" stroke="#000" stroke-miterlimit="10" pointer-events="none"/>
+    <path fill="#fff" stroke="#000" pointer-events="none" d="M0 20h80v80H0z"/>
+    <switch transform="translate(17.5 53.5)">
+        <foreignObject pointer-events="none" width="44" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" overflow="visible">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="line-height:1.2;vertical-align:top;width:44px;white-space:nowrap;overflow-wrap:normal;text-align:center" display="inline-block" font-size="12" font-family="Helvetica" color="#000">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="text-align:inherit;white-space:normal" display="inline-block" text-decoration="inherit">
+                    CanDIG
+                </div>
+            </div>
+        </foreignObject>
+        <text x="22" y="12" text-anchor="middle" font-size="12" font-family="Helvetica">
+            CanDIG
+        </text>
+    </switch>
+    <path d="M280 40h-43.63" fill="none" stroke="#000" stroke-miterlimit="10" pointer-events="none"/>
+    <path d="M231.12 40l7-3.5-1.75 3.5 1.75 3.5z" stroke="#000" stroke-miterlimit="10" pointer-events="none"/>
+    <path d="M364 70h79.63" fill="none" stroke="#000" stroke-miterlimit="10" pointer-events="none"/>
+    <path d="M448.88 70l-7 3.5 1.75-3.5-1.75-3.5z" stroke="#000" stroke-miterlimit="10" pointer-events="none"/>
+    <path fill="#fff" stroke="#000" pointer-events="none" d="M280 20h80v80h-80z"/>
+    <switch transform="translate(299.5 53.5)">
+        <foreignObject pointer-events="none" width="40" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" overflow="visible">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="line-height:1.2;vertical-align:top;width:42px;white-space:nowrap;overflow-wrap:normal;text-align:center" display="inline-block" font-size="12" font-family="Helvetica" color="#000">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="text-align:inherit;white-space:normal" display="inline-block" text-decoration="inherit">
+                    Beacon
+                </div>
+            </div>
+        </foreignObject>
+        <text x="20" y="12" text-anchor="middle" font-size="12" font-family="Helvetica">
+            Beacon
+        </text>
+    </switch>
+    <path d="M450 40h-83.63" fill="none" stroke="#000" stroke-miterlimit="10" pointer-events="none"/>
+    <path d="M361.12 40l7-3.5-1.75 3.5 1.75 3.5z" stroke="#000" stroke-miterlimit="10" pointer-events="none"/>
+    <circle cx="465" cy="17.5" fill="#fff" stroke="#000" pointer-events="none" r="7.5"/>
+    <path d="M465 25v25m0-20h-15m15 0h15m-15 20l-15 20m15-20l15 20" fill="none" stroke="#000" stroke-miterlimit="10" pointer-events="none"/>
+    <switch transform="translate(449.5 77.5)">
+        <foreignObject pointer-events="none" width="31" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" overflow="visible">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="line-height:1.2;vertical-align:top;white-space:nowrap;text-align:center" display="inline-block" font-size="12" font-family="Helvetica" color="#000">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="text-align:inherit;background-color:#fff" display="inline-block" text-decoration="inherit">
+                    Client
+                </div>
+            </div>
+        </foreignObject>
+        <text x="16" y="12" text-anchor="middle" font-size="12" font-family="Helvetica">
+            Client
+        </text>
+    </switch>
+    <path d="M150 40H86.37" fill="none" stroke="#000" stroke-miterlimit="10" pointer-events="none"/>
+    <path d="M81.12 40l7-3.5-1.75 3.5 1.75 3.5z" stroke="#000" stroke-miterlimit="10" pointer-events="none"/>
+    <path fill="#fff" stroke="#000" pointer-events="none" d="M150 0h80v80h-80z"/>
+    <switch transform="translate(180.5 33.5)">
+        <foreignObject pointer-events="none" width="18" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" overflow="visible">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="line-height:1.2;vertical-align:top;width:20px;white-space:nowrap;overflow-wrap:normal;text-align:center" display="inline-block" font-size="12" font-family="Helvetica" color="#000">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="text-align:inherit;white-space:normal" display="inline-block" text-decoration="inherit">
+                    Tyk
+                </div>
+            </div>
+        </foreignObject>
+        <text x="9" y="12" text-anchor="middle" font-size="12" font-family="Helvetica">
+            Tyk
+        </text>
+    </switch>
+</svg>
