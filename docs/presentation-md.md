@@ -1,6 +1,5 @@
 ---
 layout: presentation
-title: Beacon
 ---
 
 # Beacon API
